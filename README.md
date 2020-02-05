@@ -1,5 +1,9 @@
 # README
 
+## Branch Information
+- Master: Current code that is complete and functional.
+- aaron: Development branch (may contain broken code)
+
 ## TO DO LIST
 ### As of Jan 30th 2020
 - Short answer part [] 1 a) - e) ]
