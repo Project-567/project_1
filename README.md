@@ -36,19 +36,14 @@ https://docs.google.com/document/d/12n1HmnPfUfaclALzc7-_7KPOs3C_5ePQttm47y92aDQ/
     - a) Why is this problem an MDP?
         - are we suppose to describe the problem wrt "Sufficient statistic"? = P[St+1 | St] = P[St+1 | S1, S2 ... St]
     - b) what does it mean by "are these the only possible choices?"
-        - are we suppose to talk about diagonal actions?
-    - c) confirm our 25x25 table with entries of "1s" for all possible transitions
-    - d) What do you mean by "is the reward function provided by the only possible one?"
-        - what counts as a "optimal bahviour?"
-            - maximize the total reward? try to get to state A?
+        - there are other ways to define "states" (instead of coordinates - can be 0 - 25)
     - e) How to group bellman equations? By what criteria?
+        - What we proposed so far is okay
 - Question 2
     - function to return initial state?
-        - return a random s? assuming to play the game after trained policy?
-            - is this for marking purposes? so you can input a random state and see what happens?
+        - To return a random initial state
     - function to return a view of all possible states
-        - from a given state?
-            - assumption: input (s), output (list of s')
+        - return a list of all possible states
     - what is the probability of a transition?
 - Policy Evaluation
     - what should be the maximum iteration?
