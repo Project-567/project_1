@@ -1,6 +1,5 @@
 # Find the value function of policy
-# Can use either an iterative method or solve the system of equations
-# Show the value function you obtained to at least 4 decimals
+
 from Gridworld import Gridworld
 import numpy as np
 
@@ -17,7 +16,6 @@ state_count = gridSize*gridSize # total number of states
 iterations = 0
 theta = 0.000001
 delta_list = []
-discount_factor = 0.99 # small prefer immediate reward, large prefer future reward
 
 # initialize a policy: create an array of dimension (number of states by number of actions)
 # for equal probability amongst all actions, divide everything by the number of actions
@@ -27,18 +25,16 @@ policy = np.ones([state_count, action_count]) / action_count
 # returns a probability for each action given state
 policy[0]
 
-# create a grid object
-grid = Gridworld(5)
 
-def policy_evaluation(value_map, states, ):
-
+def policy_evaluation(value_map, states, discount_factor):
+    global iterations
     while True:
         delta = 0
         iterations+=1
-        valueMap_copy = np.copy(grid.valueMap)
+        valueMap_copy = np.copy(value_map)
 
         # start with the first state in the state list
-        for state_number, state in enumerate(grid.states):
+        for state_number, state in enumerate(states):
             value = 0
 
             # perform 4 actions per state and add the rewards (value)
@@ -49,13 +45,13 @@ def policy_evaluation(value_map, states, ):
                 reward = grid.reward(state, action)
 
                 # calculate value: policy*transition_prob*[r + gamma * value(s')]
-                value += policy[state_number][action_number]*grid.transition_prob*(reward+(discount_factor*grid.valueMap[new_position[0], new_position[1]]))          
+                value += policy[state_number][action_number]*grid.transition_prob*(reward+(discount_factor*value_map[new_position[0], new_position[1]]))          
 
             # replace the value in valueMap with the value
             valueMap_copy[state[0], state[1]] = value
 
             # calculate delta
-            delta = max(delta, np.abs(value - grid.valueMap[state[0], state[1]]))       
+            delta = max(delta, np.abs(value - value_map[state[0], state[1]]))       
             clear_output(wait=True)
             display('delta: ' + str(delta) + ' iterations: ' + str(iterations))
 
@@ -63,7 +59,7 @@ def policy_evaluation(value_map, states, ):
             delta_list.append(delta)
 
         # overwrite the original value map (update valuemap after one complete iteration of every state)
-        grid.valueMap = valueMap_copy
+        value_map = valueMap_copy
 
         # stop when change in value function falls below a given threshold
         if delta < theta:
@@ -71,9 +67,13 @@ def policy_evaluation(value_map, states, ):
     
     return value_map
 
+# create a grid object
+grid = Gridworld(5)
 
+# run policy evaluation
+final_value_map = policy_evaluation(grid.valueMap, grid.states, 0.99)
 
 # print the final value function
 print("Value Function: ")
 np.set_printoptions(precision=4)
-print(grid.valueMap)
+print(final_value_map)
