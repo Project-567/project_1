@@ -1,50 +1,76 @@
 # adapt the value_iteration.py code to be policy_iteration
 
 # policy iteration
+from Gridworld import Gridworld
+from policy_evaluation import policy_evaluation
+import numpy as np
 
+# display output
+from random import uniform
+import time
+from IPython.display import display, clear_output
+
+actions = [[-1, 0], [0, 1], [1, 0], [0, -1]] #up, right, down, left = (clockwise from up) 
+action_count = len(actions) # total number of actions
+gridSize = 5 # create a square grid of gridSize by gridSize
+state_count = gridSize*gridSize # total number of states
+
+# iterations = 0
+theta = 0.000001
+discount_factor = 0.99
+delta_list = []
+
+# initialize a policy: create an array of dimension (number of states by number of actions)
+# for equal probability amongst all actions, divide everything by the number of actions
+policy = np.ones([state_count, action_count]) / action_count
+
+# policy at state 0 = [0, 0]
+# returns a probability for each action given state
+policy[0]
+
+# create a grid object
+grid = Gridworld(5)
+
+def calculate_action_value(state, value):
+    A = np.zeros(action_count)
+    
+    # perform 4 actions per state and add the rewards (value)
+    for action_number, action in enumerate(actions):
+            
+        # get next position and reward
+        new_position = grid.p_transition(state, action)
+        reward = grid.reward(state, action)
+        
+        # get next position and reward
+        new_position = grid.p_transition(state, action)
+        reward = grid.reward(state, action)
+
+        # calculate value of action: transition_prob*[r + gamma * value(s')]
+        A[action_number] += grid.transition_prob*(reward+(discount_factor*value[new_position[0], new_position[1]]))
+    
+    return A
+
+final_max_iter = 0
+
+# POLICY ITERATION #####################################3
 while True:
     
     # POLICY EVALUATION ####################################
         # iterate through all 25 states. At each state, iterate through all 4 actions
         # to calculate the value of each action.
         # Replace the value map with the calculated value.
-    while True:
-        delta = 0
-        iterations+=1
-        valueMap_copy = np.copy(grid.valueMap)
 
-        # start with the first state in the state list
-        for state_number, state in enumerate(grid.states):
-            value = 0
+    # run policy evaluation
+    final_value_map, max_iter, delta, policy = policy_evaluation(grid.valueMap, grid.states, discount_factor, theta, grid.reward, 
+                                                                    grid.p_transition, grid.transition_prob, policy)
 
-            # perform 4 actions per state and add the rewards (value)
-            for action_number, action in enumerate(actions):
+    # for plotting purpose
+    print("iter: ", max_iter)
+    final_max_iter += max_iter
+    print("sum iter: ", final_max_iter)
+    print(len(delta))
+    delta_list.extend(delta)
 
-                # get next position and reward
-                new_position = grid.p_transition(state, action)
-                reward = grid.reward(state, action)
-
-                # calculate value: policy*transition_prob*[r + gamma * value(s')]
-                value += policy[state_number][action_number]*grid.transition_prob*(reward+(discount_factor*grid.valueMap[new_position[0], new_position[1]]))          
-
-            # replace the value in valueMap with the value
-            valueMap_copy[state[0], state[1]] = value
-
-            # calculate delta
-            delta = max(delta, np.abs(value - grid.valueMap[state[0], state[1]]))       
-            clear_output(wait=True)
-            display('delta: ' + str(delta) + ' iterations: ' + str(iterations))
-
-            # save data for plot
-            delta_list.append(delta)
-
-        # overwrite the original value map (update valuemap after one complete iteration of every state)
-        grid.valueMap = valueMap_copy
-
-        # stop when change in value function falls below a given threshold
-        if delta < theta:
-            break
-    
     # POLICY IMPROVEMENT #######################################
         # iterate through every state and choose the best action with the current policy
         # calculate the action values of every state
@@ -62,7 +88,7 @@ while True:
 
         # calculate the action values for each state using the current value function
         # eg. action_values = [#, #, #, #] = a value for each of the 4 actions
-        action_values = calculate_action_value(state, grid.valueMap)
+        action_values = calculate_action_value(state, final_value_map)
 
         # using the calculated action values, find the best action
         best_action = np.argmax(action_values)
@@ -81,3 +107,51 @@ while True:
     if policy_stable:
         break
 
+print("Iterations: ")
+print(final_max_iter)
+
+# PRINT POLICY TABLE ################################################################################
+# import pandas library
+import pandas as pd
+# define column and index
+columns=range(grid.size)
+index = range(grid.size)
+# define dataframe to represent policy table
+policy_table = pd.DataFrame(index = index, columns=columns)
+
+# iterate through policy to make a table that represents action number
+# as action name (eg. left, right, up, down)
+for state in range(len(policy)):
+    for action in range(policy.shape[1]):
+        if policy[state][action] == 1:
+
+            # calculate the row and column coordinate of the current state number
+            row = int(state/grid.size)
+            column = round((state/grid.size - int(state/grid.size))*grid.size)
+
+            # get action name
+            if action == 0:
+                action_name = 'up'
+            elif action == 1:
+                action_name = 'right'
+            elif action == 2:
+                action_name = 'down'
+            else:
+                action_name = 'left'
+            
+            # assign action name
+            policy_table.loc[row][column] = action_name
+
+print("Policy Table: ")
+print(policy_table)
+
+import matplotlib.pyplot as plt
+# get every 25th value
+delta_list_ = delta_list[0::state_count]
+# plot iteration vs delta
+plt.plot(range(final_max_iter), delta_list_)
+plt.title('Policy Iteration with Discount Factor ' + str(discount_factor))
+plt.xlabel('Iterations')
+plt.ylabel('Max Delta')
+plt.savefig('graphs/Policy-'+str(discount_factor)+'.png')
+plt.show()
