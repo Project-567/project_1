@@ -39,12 +39,12 @@ def policy_evaluation(value_map, states, discount_factor, theta, reward, transit
 
             # calculate delta
             delta = max(delta, np.abs(value - value_map[state[0], state[1]]))
-            print("Delta: ", delta)       
+            # print("Delta: ", delta)       
             # clear_output(wait=True)
             # display('delta: ' + str(delta) + ' iterations: ' + str(iterations))
 
-            # save data for plot
-            delta_list.append(delta)
+        # save data for plot
+        delta_list.append(delta)
 
         # overwrite the original value map (update valuemap after one complete iteration of every state)
         value_map = valueMap_copy
@@ -78,15 +78,15 @@ def main():
     print("Value Function: ")
     np.set_printoptions(precision=4)
     print(final_value_map)
-    # print("Delta: ")
-    # print(delta)
+    print("Delta: ")
+    print(len(delta))
 
     # print delta vs iterations
     import matplotlib.pyplot as plt
-    # get every 25th value
-    delta_list = delta[0::state_count]
+    # # get every 25th value
+    # delta_list = delta[0::state_count]
     # plot iteration vs delta
-    plt.plot(range(max_iter), delta_list)
+    plt.plot(range(max_iter), delta)
     plt.title('Policy Iteration with Discount Factor ' + str(discount_factor))
     plt.xlabel('Iterations')
     plt.ylabel('Max Delta')
@@ -95,4 +95,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
