@@ -38,7 +38,8 @@ def policy_evaluation(value_map, states, discount_factor, theta, reward, transit
             valueMap_copy[state[0], state[1]] = value
 
             # calculate delta
-            delta = max(delta, np.abs(value - value_map[state[0], state[1]]))       
+            delta = max(delta, np.abs(value - value_map[state[0], state[1]]))
+            print("Delta: ", delta)       
             # clear_output(wait=True)
             # display('delta: ' + str(delta) + ' iterations: ' + str(iterations))
 

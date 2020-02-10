@@ -4,6 +4,7 @@
 from Gridworld import Gridworld
 from policy_evaluation import policy_evaluation
 import numpy as np
+from random import randint
 
 # display output
 from random import uniform
@@ -20,13 +21,15 @@ theta = 0.000001
 discount_factor = 0.99
 delta_list = []
 
-# initialize a policy: create an array of dimension (number of states by number of actions)
-# for equal probability amongst all actions, divide everything by the number of actions
-policy = np.ones([state_count, action_count]) / action_count
+# # initialize a policy: create an array of dimension (number of states by number of actions)
+# # for equal probability amongst all actions, divide everything by the number of actions
+# policy = np.ones([state_count, action_count]) / action_count
 
-# policy at state 0 = [0, 0]
-# returns a probability for each action given state
-policy[0]
+# create a random policy
+random_policy = np.random.randint(1000, size=(state_count, action_count))
+random_policy = random_policy/random_policy.sum(axis=1)[:,None]
+policy = random_policy
+
 
 # create a grid object
 grid = Gridworld(5)
@@ -65,10 +68,10 @@ while True:
                                                                     grid.p_transition, grid.transition_prob, policy)
 
     # for plotting purpose
-    print("iter: ", max_iter)
+    # print("iter: ", max_iter)
     final_max_iter += max_iter
-    print("sum iter: ", final_max_iter)
-    print(len(delta))
+    # print("sum iter: ", final_max_iter)
+    # print(len(delta))
     delta_list.extend(delta)
 
     # POLICY IMPROVEMENT #######################################
@@ -144,7 +147,10 @@ for state in range(len(policy)):
 
 print("Policy Table: ")
 print(policy_table)
+print("Value Map: ")
+print(final_value_map)
 
+# PRINT DELTA PLOT #####################################################################
 import matplotlib.pyplot as plt
 # get every 25th value
 delta_list_ = delta_list[0::state_count]
