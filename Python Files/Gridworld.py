@@ -4,26 +4,66 @@
 # Function 2: return a view of all possible states
 # Function 3 and 4: return, respectively, the reward and probability of a transition (s, a, s') from state s to state s' when taking action a
 
-def function1():
+import numpy as np
 
-    # get initial state
+class Gridworld():
+    def __init__(self, gridSize):
+        self.valueMap = np.zeros((gridSize, gridSize))
+        self.states = [[i, j] for i in range(gridSize) for j in range(gridSize)]
+        self.size = gridSize
+        self.new_pos = [0, 0] # initialize new position for p_transition
+        self.pos_check = [0, 0] # a copy of new position
+        self.transition_prob = 1 # deterministic
+    
+    def initial_state(self):
+        # randomly generate an initial state
+        i = random.randint(0, len(self.states)-1)
+        rand_state = self.states[i]
+        return rand_state
+    
+    def possible_states(self):
+        # return the possible states
+        return self.states
+    
+    def reward(self, current_pos, action):
+        # return the reward        
+        
+        # take action in current pos
+        self.new_pos = np.array(current_pos) + np.array(action)
 
-    return initial_state
+        # normally, reward = 0
+        reward = 0
 
-def function2():
+        # if new pos results in off the grid, return reward -1
+        if -1 in self.new_pos or self.size in self.new_pos:
+            reward = -1
+        # if in state A, transition to state A'
+        if current_pos == [0, 1]:
+            reward = 10
+        # if in state B, transition to state B'
+        if current_pos == [0, 3]:
+            reward = 5
+        return reward
+    
+    # def transition_probability(self, current_pos, new_pos):
+        # a function that returns the entries of the transition probability matrix?
+        # eg. input current state, new state, output = 0.25...0.5...1 ... etc. ?
+    
+    def p_transition(self, current_pos, action):
+        # return the transition probability
+        # get next position: state: [0, 0], action: [0, 1], new_state = [0, 1]
+        self.new_pos = np.array(current_pos) + np.array(action)
+        self.pos_check = self.new_pos # make a copy of new pos before being overwritten below
 
-    # get view of all possible states
-
-    return possible_states
-
-def function3():
-
-    # get reward
-
-    return reward
-
-def function4():
-
-    # get probability of transition
-
-    return transition_probability
+        # if taking an action crosses the border = agent stays in same position
+        if -1 in self.new_pos or self.size in self.new_pos: 
+            self.new_pos = current_pos
+            
+        # if in state A, transition to state A'
+        if current_pos == [0, 1]:
+            self.new_pos = [4, 1]
+            
+        # if in state B, transition to state B'
+        if current_pos == [0, 3]:
+            self.new_pos = [2, 3]
+        return self.new_pos
