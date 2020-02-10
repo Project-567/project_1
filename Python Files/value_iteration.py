@@ -22,14 +22,15 @@ theta = 0.000001
 discount_factor = 0.99
 delta_list = []
 
-# initialize a policy: create an array of dimension (number of states by number of actions)
-# for equal probability amongst all actions, divide everything by the number of actions
-policy = np.ones([state_count, action_count]) / action_count
+# UNCOMMENT THE FOLLOWING FOR EVEN POLICY
+# # initialize a policy: create an array of dimension (number of states by number of actions)
+# # for equal probability amongst all actions, divide everything by the number of actions
+# policy = np.ones([state_count, action_count]) / action_count
 
-# # create a random policy
-# random_policy = np.random.randint(1000, size=(state_count, action_count))
-# random_policy = random_policy/random_policy.sum(axis=1)[:,None]
-# policy = random_policy
+# create a random policy
+random_policy = np.random.randint(1000, size=(state_count, action_count))
+random_policy = random_policy/random_policy.sum(axis=1)[:,None]
+policy = random_policy
 
 # create a grid object
 grid = Gridworld(5)
@@ -134,8 +135,8 @@ for state in range(len(policy)):
 
 print("Policy Table: ")
 print(policy_table)
-# print("Value Map: ")
-# print(final_value_map)
+print("Value Map: ")
+print(grid.valueMap)
 
 # PRINT DELTA PLOT #####################################################################
 import matplotlib.pyplot as plt

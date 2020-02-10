@@ -18,18 +18,18 @@ state_count = gridSize*gridSize # total number of states
 
 # iterations = 0
 theta = 0.000001
-discount_factor = 0.8
+discount_factor = 0.99
 delta_list = []
 
-# initialize a policy: create an array of dimension (number of states by number of actions)
-# for equal probability amongst all actions, divide everything by the number of actions
-policy = np.ones([state_count, action_count]) / action_count
+# UNCOMMENT THE FOLLOWING FOR EVEN POLICY
+# # initialize a policy: create an array of dimension (number of states by number of actions)
+# # for equal probability amongst all actions, divide everything by the number of actions
+# policy = np.ones([state_count, action_count]) / action_count
 
-# # create a random policy
-# random_policy = np.random.randint(1000, size=(state_count, action_count))
-# random_policy = random_policy/random_policy.sum(axis=1)[:,None]
-# policy = random_policy
-
+# Initiate a random policy
+random_policy = np.random.randint(1000, size=(state_count, action_count))
+random_policy = random_policy/random_policy.sum(axis=1)[:,None]
+policy = random_policy
 
 # create a grid object
 grid = Gridworld(5)
@@ -68,14 +68,8 @@ while True:
                                                                     grid.p_transition, grid.transition_prob, policy)
 
     # for plotting purpose
-    # print("iter: ", max_iter)
     final_max_iter += max_iter
-    # print("sum iter: ", final_max_iter)
-    # print(len(delta))
-    # print(delta)
     delta_list.extend(delta)
-    print("Value Map: ")
-    print(final_value_map)
 
     # POLICY IMPROVEMENT #######################################
         # iterate through every state and choose the best action with the current policy
