@@ -206,7 +206,7 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 the behaviour of the MDP you formulated in the previous question. Your class
 should contain four functions: one to return the initial state of the MDP, one to
 return a view of all possible states, and two to return, respectively, the reward and
-probability of a transition (s; a; s') from state s to state s0 when taking action a.}
+probability of a transition (s; a; s') from state s to state s' when taking action a.}
 \\
 
 \lstset{language=Python}
@@ -262,14 +262,26 @@ iterative method or solve the system of equations. Show the value function you
 obtained to at least four decimals.}
 \\
 
-
 \noindent
 Following value function is generated based on equal action probability, and  =
 0.99. The value function found using an iterative method is as follow:
 \\
 
+\begin{figure}[h]
+\includegraphics[scale=0.6]{v_evaluation}
+\centering
+\caption{Value Function using Policy Evaluation}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{policy_eval}
+\centering
+\caption{Convergence of Policy Evaluation}
+\end{figure}
+
 
 % VALUE ITERATION---------------------------------------------------------------
+\newpage
 \section{Value Iteration}
 \textbf{The goal now is to solve the MDP above using dynamic programming. In a separate
 file called value iteration.py, provide a complete implementation of the value
@@ -287,7 +299,24 @@ derived earlier.}
 \textbf{-}
 \noindent
 \textbf{How many iterations did this take for each value of $\gamma$ ?}
-\\
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{Value_8}
+\centering
+\caption{Convergence of Policy Evaluation}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{Value_95}
+\centering
+\caption{Convergence of Policy Evaluation}
+\end{figure}
+
+\begin{figure}[h]
+\includegraphics[scale=0.7]{Value_99}
+\centering
+\caption{Convergence of Policy Evaluation}
+\end{figure}
 
 \noindent
 \textbf{-}
@@ -305,6 +334,7 @@ conjectured earlier?}
 
 
 % POLICY ITERATION---------------------------------------------------------------
+\newpage
 \section{Policy Iteration}
 \textbf{Repeat the previous part of the assignment, but now implement the policy
 iteration algorithm from class in a file called policy iteration.py. Report your
