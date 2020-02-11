@@ -12,7 +12,7 @@
 
 \title{Dynamic Distributed Decision Making \\Project 1 \\MIE567} % Title of the assignment
 
-\author{\texttt{Hao Tan 999735728}\\ \texttt{Xiali Wu 999011322} \\ \texttt{David Molina}} % Author name and email address
+\author{\texttt{Hao Tan 999735728}\\ \texttt{Xiali Wu 999011322} \\ \texttt{David Molina 1005615318}} % Author name and email address
 
 \date{University of Toronto --- \today} % University, school and/or department name(s) and a date
 
@@ -45,30 +45,24 @@ decision process. In particular:}
 \\
 
 \noindent
-This problem can be modeled as an MDP because it has a discrete state space
-(cells) and a set of actions (north, east, west, south)/(up, right, down, left),
-where the transition from one state to another is based on a given action.
-\\
-
-\noindent
-We can model this problem in terms of components such as a reward
-function,actions, transition probability, states, time steps, discount factor.
-All these components describe a MDP type of question. This problem is infinite
+This problem can be described as an MDP because it can be modeled in terms of
+components such as a reward function, actions, transition probability, states,
+time steps and discount factor. Additionally, this problem is an infinite
 horizon MDP since we can take unlimited amounts of steps between cells, and
-possibly revisit the same cell. Unlimited amount steps are definitely not
-optimal , but can potentially happen to max reward. Therefore, for infinite
-horizon MDP, a discount factor accounts for future reward.
+possibly re-visit the same cell. In this case, unlimited amount of steps can
+potentially happen to maximize rewards; therefore, a discount factor is included
+for future rewards.
 \\
 
 \noindent
-Based on the definition of Markovian property, a stochastic process has the
-Markov property if the conditional probability distribution of future states of
-the process (conditional on both past and present states) depends only upon the
-present state, not on the sequence of events that preceded it (ie. P[St+1 | St]
-= P[St+1 | S1, S2 ... St]). In the given problem description, since the agent
-can only move one cell for one action, the next cell is only dependent on the
-current cell; the next cell is not depending on all previous cell before the
-current cell.
+Furthermore, based on the definition of Markovian property, a stochastic process
+has the Markov property if the conditional probability distribution of future
+states of the process (conditional on both past and present states) depends only
+upon the present state, not on the sequence of events that preceded it (ie.
+P[St+1 | St] = P[St+1 | S1, S2 ... St]). In the given problem description, the
+agent can only move one cell per action, while the next cell is only dependent
+on the current cell. In other words, the next cell is not dependent on previous
+cells before the current cell.
 \\
 
 % 1B---------------------------------------------------------------
@@ -80,48 +74,49 @@ these the only possible choices? Why or why not?}
 \\
 
 \noindent
-The States can be represented as the coordinates of the grid (i,j), where i=
-0,..,4, and j=0,...,4. Then, the set of states is State = {[ (0,0), (0,1),
-(0,2), (0,3), (0,4), (1,0), (1,1), (1,2), (1,3), (1,4), (2,0), (2,1), (2,2),
-(2,3), (2,4), (3,0), (3,1), (3,2), (3,3), (3,4), (4,0), (4,1), (4,2), (4,3),
-(4,4)]}.
-\\
+The states can be represented as the coordinates of the grid world (i,j), where i=
+0,..,4, and j=0,...,4, as seen in the following.
 
-\begin{figure}[h]
-\includegraphics[scale=0.5]{states}
-\centering
-\caption{States represented in coordinate format}
-\end{figure}
+\begin{equation}
+\text { states }=\left[\begin{array}{lllll}
+{(0,0)} & {(0,1)} & {(0,2)} & {(0,3)} & {(0,4)} \\
+{(1,0)} & {(1,1)} & {(1,2)} & {(1,3)} & {(1,4)} \\
+{(2,0)} & {(2,1)} & {(2,2)} & {(2,3)} & {(2,4)} \\
+{(3,0)} & {(3,1)} & {(3,2)} & {(3,3)} & {(3,4)} \\
+{(4,0)} & {(4,1)} & {(4,2)} & {(4,3)} & {(4,4)}
+\end{array}\right]
+\end{equation}
+
 
 \noindent
-The available set of actions are north, east, west, south, that can be
-represented as adding or subtracting to the respective coordinate, i.e Action =
-{[0, 1], [0, -1], [1, 0], [-1, 0]}. [0,-1] means going west; [-1,0] means going
-north; [0,1] means going east; [1,0] means going south.
-\\
+The available set of actions are North, East, West, South, which can be implemented
+using the addition and subtraction of grid world coordinates. For example, the following
+shows the possible actions where (-1, 0) means North, (0,1) means East, (1,0) means South,
+and (0,-1) means West.
+
+\begin{equation}
+\text { actions }=[(-1,0),(0,1),(1,0),(0,-1)]
+\end{equation}
 
 \noindent
 There are other alternatives for the representation of this problem, for
 example, each cells can be represented with a number from 1 to 25 and actions
-can be represented as letters A = {N, E, W, S} or {up, right, down, left}. This
-type of action representation is difficult to implement in mathematical
-calculations and representation. We can’t identify the situation of off-the-grid
-when moving one action.
-\\
+can be represented as letters A = {N, E, W, S} or {up, right, down, left}. These
+type of representations are tidieous to implement. For example, using continuous
+numbers to represent states would be difficult to stop the agent from moving
+off-grid without excessive \textit{if-statements}. In terms of other possible
+actions, one may considerd diagonal actions such as those shown below.
+
+\begin{equation}
+\text { diagonal actions }=[(1,1),(-1,1),(1,-1),(-1,-1)]
+\end{equation}
 
 \noindent
-We decided to represent it as a coordinate to facilitate coding, mathematical
-calculations and visual representation of the outputs for this project. 
-\\
-
-\noindent
-Diagonal action ={ [1, 1], [-1, -1], [1,-1], [-1,1]} Diagonal action requires
-both coordinates to move. Therefore with the constraint of moving one cell in
-one direction at a time, diagonal actions require moving two directions in order
-to complete one action at a time, given only compass direction of north, east,
-west, and south. This conflicts with the problem description, and therefore not
-used in the model.
-\\
+Diagonal actions require the agent to move two steps per action to arrive at the
+intended cell. For example, to move North-West, the agent must move West then
+Easy or vice versa. This conflicts with the problem description where the agent
+is only allowed to move one cell at a time; therefore, this alternative  not
+used in the model. \\
 
 
 % 1C---------------------------------------------------------------
@@ -133,19 +128,22 @@ the non-zero entries.)}
 \\
 
 \noindent
-Assuming a policy where each four actions has the same probability to be chosen,
-then the transition probability matrix is 0.25 for all four cells surrounding
-the current cell. For example, the current cell is (0,0); there is 50 \% chances
-that it will go off the grid; there is 25 \% chances of moving to cell(0,1);
-25\% chances of moving to cell (1,0). 
-\\
-
-\begin{figure}[h]
-\includegraphics[scale=0.5]{transition_matrix}
-\centering
-\caption{Transition Matrix}
-\end{figure}
-
+In a transition probability matrix, the sum of each row is equal to one. In the
+transition probability matrix presented in the Appendix, the vertical axis along
+the left represents the current state, $s$, while the horizontal axis along the
+top represents the potential next state, $s'$. Assuming a random policy with
+equal probability distribution for all actions, there is a 25\% chance of
+arriving at the intended neighbor cell except for the cells along the border of
+the grid. For the cells at each of the corners, there are 2 actions each that
+would take the agent off grid. In this scenario, the problem description states
+that the agent would remain in its current position; therefore, the corner
+states have a 50\% chance of transitioning to its own state and 25\% chance of
+transitioning to a neighbor state. The same logic can be applied for the other
+border states, where there is always a probability of returning to its own state
+if an off-grid action is taken. Additionally, there are 2 special states;
+namely, State A and B where all actions would take the agent directly to A' and
+B', respectively. The transition probability matrix is presented in the
+\textbf{Appendix} \\
 
 % 1D---------------------------------------------------------------
 \noindent
@@ -157,15 +155,57 @@ to the same optimal behaviour}
 \\
 
 \noindent
-The reward function = {0,-1,+5,+10} is the only possible one given the problem
-description. This is the only reward function that leads to the optimal
-behaviour solved below. To satisfy this reward forward, we are assuming that
-when the current state is at the edge, taking East or West direction meaning the
-next state is off the grid. For example, the current state is (0,4), taking East
-direction leads to off-the-grid. However, without the state assumption, taking
-East or West direction can mean that the next state is the last cell in the
-above row, or the first cell in the next row. Take the same current state (0,4)
-as an example, then taking East direction leads to (1,0). 
+The reward function privided is by the problem is shown below. In this case, a
+transition from A to A' and B to B' will yield a reward of 10 and 5,
+respectively. A transition that would take the agent off grid would result in a
+reward of -1 while all other transitions yield a reward of zero. 
+
+\begin{equation}
+\text { Reward }={[0,-1,+5,+10]}
+\end{equation}
+
+\noindent
+Using the state and action representation described in previous questions, an
+off grid action is detected when elements within the next state coordinate holds
+a value greater or less than the column/row size. For example, the following
+show two cases of an agent going off grid. In equation (5), the agent is
+originally in state (0,0) and the chosen action is to the left/West (0, -1),
+this results in a coordinate (0, -1) that featured an element smaller than the
+grid column/row size. Conversely, in equation (6), the agent took an action
+going to the right when in state (0, 4) which resulted in the next state, (0,
+5), with an element larger than the row/column size. In these cases, the agent
+receives a reward of 1.
+
+\noindent
+By having a different reward function, the overall optimization problem is different.
+As a result, this is the only reward function that leads to optimal
+behaviour as described in the problem description.
+
+\begin{equation}
+\left[\begin{array}{c}
+{0} \\
+{0}
+\end{array}\right]+\left[\begin{array}{c}
+{0} \\
+{-1}
+\end{array}\right]=\left[\begin{array}{c}
+{0} \\
+{-1}
+\end{array}\right]
+\end{equation}
+
+\begin{equation}
+\left[\begin{array}{l}
+{0} \\
+{4}
+\end{array}\right]+\left[\begin{array}{l}
+{0} \\
+{1}
+\end{array}\right]=\left[\begin{array}{l}
+{0} \\
+{5}
+\end{array}\right]
+\end{equation}
 \\
 
 % 1E---------------------------------------------------------------
@@ -179,20 +219,27 @@ them) What do you think is/are the optimal policy/policies for this problem,
 and why (you do NOT need to solve the Bellman equations)?}
 \\
 
-\noindent
-Since the goal is maximizing reward, optimal policy always looks for A or B to
-get +10 or +5 reward. If the initial state is away from row 0 where A and B are
-located, such as row 4, the optimal policy requires more actions to get to the
-vicinity of A or B. If the initial state is in the vicinity of A and B, there is
-a tradeoff between more actions towards A and earning discounted +5 more reward
-from A->A’ compared to B->B’.
-\\
+% \noindent
+% Since the goal is maximizing reward, optimal policy always looks for A or B to
+% get +10 or +5 reward. If the initial state is away from row 0 where A and B are
+% located, such as row 4, the optimal policy requires more actions to get to the
+% vicinity of A or B. If the initial state is in the vicinity of A and B, there is
+% a tradeoff between more actions towards A and earning discounted +5 more reward
+% from A->A’ compared to B->B’.
+% \\
 
-% \begin{figure}[h]
-% \includegraphics[scale=0.5]{bellman_groups}
-% \centering
-% \caption{Groups of Bellman Equations}
-% \end{figure}
+\noindent
+To write the Bellman equations for this problem, we have grouped together states with similar
+value functions. The different groups are shown in color in the following figure.
+
+\begin{figure}[h]
+\includegraphics[scale=0.5]{bellman_groups}
+\centering
+\caption{Groups of Bellman Equations}
+\end{figure}
+
+\noindent
+The following shows the Bellman equation.
 
 \begin{equation}
 v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
@@ -200,6 +247,8 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 
 
 % 1E BELLMAN EQUATIONS -----------------------------------------------------
+\noindent
+The following represents the value function for state (0, 0)
 
 \begin{equation}
 \begin{array}{c}
@@ -209,6 +258,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 \end{array}
 \end{equation}
 
+\noindent
+The following represents the value function for state (0, 1)
+
 \begin{equation}
 \begin{array}{c}
 {P([0,-1] |(i, j))(10+\gamma v(i+4, j))+P([-1,0]|(i,j))(10+\gamma v(i+4, j))} \\
@@ -216,6 +268,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 {\quad \text { for } i \in\{0\}, j \in\{1\}}
 \end{array}
 \end{equation}
+
+\noindent
+The following represents the value function for state (0, 2)
 
 \begin{equation}
 \begin{array}{c}
@@ -225,6 +280,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 \end{array}
 \end{equation}
 
+\noindent
+The following represents the value function for state (0, 3)
+
 \begin{equation}
 \begin{array}{c}
 {P([0,-1] |(i, j))(5+\gamma v(i+2, j))+P([-1,0] |(i, j))(5+\gamma v(i+2, j))} \\
@@ -232,6 +290,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 {\quad \text { for } i \in\{0\}, j \in\{3\}}
 \end{array}
 \end{equation}
+
+\noindent
+The following represents the value function for state (0, 4)
 
 \begin{equation}
 \begin{array}{c}
@@ -241,6 +302,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 \end{array}
 \end{equation}
 
+\noindent
+The following represents the value function for state (1,0), (2,0), (3,0).
+
 \begin{equation}
 \begin{array}{c}
 {P([0,-1] |(i, j))(-1+\gamma v(i, j))+P([-1,0] |(i, j))(0+\gamma v(i-1, j))}\\
@@ -248,6 +312,11 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 {\text { for } i \in\{1,2,3\}, j \in\{0\}}
 \end{array}
 \end{equation}
+
+\noindent
+The following represents the value function for state (1,1), (1,2), (1,3),
+(2,1),(2,2),(2,3),\\
+(3,1),(3,2),(3,3).
 
 \begin{equation}
 \begin{array}{c}
@@ -257,6 +326,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 \end{array}
 \end{equation}
 
+\noindent
+The following represents the value function for state (1,4),(2,4),(3,4).
+
 \begin{equation}
 \begin{array}{c}
 {P([0,-1]|(i, j))(0+\gamma v(i, j-1))+P([-1,0] |(i, j))(0+\gamma v(i-1, j))} \\
@@ -264,6 +336,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 { \text { for } i \in\{1,2,3\}, j \in\{4\}}
 \end{array}
 \end{equation}
+
+\noindent
+The following represents the value function for state (4,0).
 
 \begin{equation}
 \begin{array}{c}
@@ -273,6 +348,9 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 \end{array}
 \end{equation}
 
+\noindent
+The following represents the value function for state (4,1), (4,2), (4,3).
+
 \begin{equation}
 \begin{array}{c}
 {P([0,-1] |(i,j))(0+\gamma v(i, j-1))+P([-1,0] |(i, j))(0+\gamma v(i-1, j))} \\
@@ -281,6 +359,8 @@ v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\
 \end{array}\\
 \end{equation}
 
+\noindent
+The following represents the value function for state (4,4).
 
 \begin{equation}
 \begin{array}{c}
@@ -305,7 +385,7 @@ probability of a transition (s; a; s') from state s to state s' when taking acti
 
 \lstset{language=Python}
 \lstset{frame=lines}
-\lstset{caption={Function 1: }}
+\lstset{caption={Returns a random initial state}}
 \lstset{label={lst:code_direct}}
 \lstset{basicstyle=\footnotesize}
 \begin{lstlisting}
@@ -316,7 +396,7 @@ probability of a transition (s; a; s') from state s to state s' when taking acti
         return rand_state
 \end{lstlisting}
 
-\lstset{caption={Function 2: }}
+\lstset{caption={Returns a view of all possile states}}
 \lstset{label={lst:code_direct}}
 \lstset{basicstyle=\footnotesize}
 \begin{lstlisting}
@@ -325,7 +405,16 @@ probability of a transition (s; a; s') from state s to state s' when taking acti
         return self.states
 \end{lstlisting}
 
-\lstset{caption={Function 3: }}
+\lstset{caption={Returns probability of transition from $s$ to $s'$ given $a$}}
+\lstset{label={lst:code_direct}}
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}
+    def transition_probability(self, current_pos, new_pos):
+        # deterministic environment = s + a has a 100% probability of ending up in s'
+        return 1
+\end{lstlisting}
+
+\lstset{caption={Returns a reward given current position and action }}
 \lstset{label={lst:code_direct}}
 \lstset{basicstyle=\footnotesize}
 \begin{lstlisting}
@@ -348,6 +437,7 @@ probability of a transition (s; a; s') from state s to state s' when taking acti
 
 
 % POLICY EVALUATION---------------------------------------------------------------
+\newpage
 \section{Policy Evaluation}
 \textbf{Now, suppose the agent selects all four actions with equal probability. Use your
 answers to questions 1 and 2 to write a python function, in a new file policy
@@ -367,11 +457,11 @@ Following value function is generated based on equal action probability, and  =
 \caption{Value Function using Policy Evaluation}
 \end{figure}
 
-% \begin{figure}[h]
-% \includegraphics[scale=0.7]{policy_eval}
-% \centering
-% \caption{Convergence of Policy Evaluation}
-% \end{figure}
+\begin{figure}[h]
+\includegraphics[scale=0.7]{policy_evaluation_99}
+\centering
+\caption{Convergence of Policy Evaluation}
+\end{figure}
 
 
 % VALUE ITERATION---------------------------------------------------------------
@@ -395,24 +485,6 @@ derived earlier.}
 \textbf{How many iterations did this take for each value of $\gamma$ ?}
 \\
 
-% \begin{figure}[h]
-% \includegraphics[scale=0.5]{Value_8}
-% \centering
-% \caption{Convergence of Policy Evaluation}
-% \end{figure}
-
-% \begin{figure}[h]
-% \includegraphics[scale=0.5]{Value_95}
-% \centering
-% \caption{Convergence of Policy Evaluation}
-% \end{figure}
-
-% \begin{figure}[h]
-% \includegraphics[scale=0.5]{Value_99}
-% \centering
-% \caption{Convergence of Policy Evaluation}
-% \end{figure}
-
 \noindent
 \textbf{-}
 \noindent
@@ -426,6 +498,15 @@ obtained for each value of $\gamma$?}
 \textbf{Does the optimal policy you obtained correspond to the policy you
 conjectured earlier?}
 \\
+
+
+\begin{figure}[h]
+\includegraphics[scale=0.48]{VI_chart}
+\centering
+\caption{Value Iteration results}
+\end{figure}
+
+
 
 
 % POLICY ITERATION---------------------------------------------------------------
@@ -462,7 +543,15 @@ obtained for each value of $\gamma$?}
 conjectured earlier?}
 \\
 
+\begin{figure}[h]
+\includegraphics[scale=0.48]{PI_chart}
+\centering
+\caption{Policy Iteration results}
+\end{figure}
+
+
 % ALGORITHM COMPARISON---------------------------------------------------------------
+\newpage
 \section{Comparison of Algorithms}
 \textbf{In the final section of your report, you must compare the two algorithms you
 implemented and their performance on the Gridworld domain, and comment on any
@@ -500,5 +589,16 @@ do you think would work better if the problem was scaled up?}
 or important observations that you discovered while building or
  running your experiments.}
 \\
+
+
+% APPENDIX-------------------------------------
+\newpage
+\section{Appendix}
+
+\begin{figure}[h]
+\includegraphics[scale=0.5]{transition_matrix}
+\centering
+\caption{Transition Matrix}
+\end{figure}
 
 \end{document}
