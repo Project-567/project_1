@@ -97,7 +97,7 @@ The States can be represented as the coordinates of the grid (i,j), where i=
 The available set of actions are north, east, west, south, that can be
 represented as adding or subtracting to the respective coordinate, i.e Action =
 {[0, 1], [0, -1], [1, 0], [-1, 0]}. [0,-1] means going west; [-1,0] means going
-north; [0,1] means going east; [0,-1] means going south.
+north; [0,1] means going east; [1,0] means going south.
 \\
 
 \noindent
@@ -188,14 +188,106 @@ a tradeoff between more actions towards A and earning discounted +5 more reward
 from A->A’ compared to B->B’.
 \\
 
-\begin{figure}[h]
-\includegraphics[scale=0.5]{bellman_groups}
-\centering
-\caption{Groups of Bellman Equations}
-\end{figure}
+% \begin{figure}[h]
+% \includegraphics[scale=0.5]{bellman_groups}
+% \centering
+% \caption{Groups of Bellman Equations}
+% \end{figure}
 
 \begin{equation}
 v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
+\end{equation}
+
+
+% 1E BELLMAN EQUATIONS -----------------------------------------------------
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1] |(i, j))(-1+\gamma v(i, j))+P[-1,0] |(i, j)(-1+\gamma v(i, j))} \\
+{+P([0,+1](i, j))(0+\gamma v(i, j+1))+P([+1, 0] |(i, j))(0+\gamma v(i+1, j))} \\
+{\quad \text { for } i \in\{0\}, j \in\{0\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1] |(i, j))(10+\gamma v(i+4, j))+P([-1,0]|(i,j))(10+\gamma v(i+4, j))} \\
+{+P([0,+1] |(i, j))(10+\gamma v(i+4, j))+P([+1,0]|(i,j))(10+\gamma v(i+4, j))} \\
+{\quad \text { for } i \in\{0\}, j \in\{1\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1](i, j))(0+\gamma v(i, j-1))+P([-1,0] |(i, j))(-1+\gamma v(i, j))} \\
+{+P([0,+1] |(i, j))(0+\gamma v(i, j+1))+P(\tau+1,0] |(i, j))(0+\gamma v((i+1), j))} \\
+{\quad \text { for } i \in\{0\}, j \in\{2\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1] |(i, j))(5+\gamma v(i+2, j))+P([-1,0] |(i, j))(5+\gamma v(i+2, j))} \\
+{+P([0,+1](i, j))(5+\gamma v(i+2, j))+P([+1,0] |(i, j))(5+\gamma v(i+2, j))} \\
+{\quad \text { for } i \in\{0\}, j \in\{3\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1] |(i, j))(-1+\gamma v(i, j))+P([-1,0] |(i, j))(0+\gamma v(i-1, j))} \\
+{+P([0,+1] |(i, j))(0+\gamma v(i, j+1))+P([+1,0] |(i, j))(0+\gamma v(i+1, j))} \\
+{\quad \text { for } i \in\{1,2,3\}, j \in\{0\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1]|(i, j))(-1+\gamma v(i, j))+P([-1,0] /(i, j))(0+\gamma v(i-1, j))}\\
+{\left.\left.+P(\left[0,+1\right] |(i, j)\right)(0+\gamma(i, j+1))+P([+1,0] |(i, j)\right)(0+\gamma v(i+1, j))}\\
+{\text { for } i \in\{1,2,3\}, j \in\{0\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1] |(i,j))(0+\gamma v(i, j-1))+P([-1,0] |(i, j))(0+\gamma v(i-1, j))} \\
+{+P([0,+1]|(i, j)| 0+\gamma v(i, j+1))+P([+1,0] |(i, j))(0+\gamma v(i+1, j))} \\
+{\quad \text { for } i \in\{1,2,3\}, j \in\{1,2,3\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{P([0,-1]|(i, j))(0+\gamma v(i, j-1))+P([-1,0] |(i, j))(0+\gamma v(i-1, j))} \\
+{+P([0,+1]|(i, j)|-1+\gamma v(i, j))+P([+1,0] |(i, j))(0+\gamma v(i+1, j))} \\
+{\quad \text { for } i \in\{1,2,3\}, j \in\{4\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{\left.P(\left[0,-1\right]|(i, j)(-1+\gamma v(i, j))+P([-1,0]|(i, j)\right)\left(0+\gamma v \left(i-1, j\right)\right)} \\
+{\left.+P\left([0,+1]\right|(i, j))(0+\gamma v(i, j+1))+P([+1,0]|(i, j)|-1+\gamma v(i, j)\right)} \\
+{\text{for } i \in\{4\}, j \in\{0\}}
+\end{array}
+\end{equation}
+
+\begin{equation}
+\begin{array}{c}
+{{P\left([0,-1] |(i,j)\right](0+\gamma v(i, j-1))+P([-1,0] |(i, j))\left(0+\gamma v(i-1, j)\right)}} \\
+{{\left.+P([0,+1] |(i, j)\right)(0+\gamma v(i, j+1))+P([+1,0] |(i, j))(-1+\gamma v(i, j))}}\\
+{\text { for } i \in\{4\}, j \in\{1,2,3\}}
+\end{array}\\
+\end{equation}
+
+
+\begin{equation}
+\begin{array}{c}
+{\left.\left.P\left([0,-1\right] |(i, j)\right)(0+\gamma v(i, j-1))+P([-1,0]|(i, j)\right)(0+\gamma v(i-1, j))} \\
+{+P([0,+1]|(i, j))(1+\gamma v(i, j))+P([+1,0]|(i,j))(-1+\gamma v(i, j))} \\
+{\quad \text { for } i \in\{4\}, j \in\{4\}}
+\end{array}
 \end{equation}
 
 
@@ -275,11 +367,11 @@ Following value function is generated based on equal action probability, and  =
 \caption{Value Function using Policy Evaluation}
 \end{figure}
 
-\begin{figure}[h]
-\includegraphics[scale=0.7]{policy_eval}
-\centering
-\caption{Convergence of Policy Evaluation}
-\end{figure}
+% \begin{figure}[h]
+% \includegraphics[scale=0.7]{policy_eval}
+% \centering
+% \caption{Convergence of Policy Evaluation}
+% \end{figure}
 
 
 % VALUE ITERATION---------------------------------------------------------------
@@ -301,24 +393,25 @@ derived earlier.}
 \textbf{-}
 \noindent
 \textbf{How many iterations did this take for each value of $\gamma$ ?}
+\\
 
-\begin{figure}[h]
-\includegraphics[scale=0.5]{Value_8}
-\centering
-\caption{Convergence of Policy Evaluation}
-\end{figure}
+% \begin{figure}[h]
+% \includegraphics[scale=0.5]{Value_8}
+% \centering
+% \caption{Convergence of Policy Evaluation}
+% \end{figure}
 
-\begin{figure}[h]
-\includegraphics[scale=0.5]{Value_95}
-\centering
-\caption{Convergence of Policy Evaluation}
-\end{figure}
+% \begin{figure}[h]
+% \includegraphics[scale=0.5]{Value_95}
+% \centering
+% \caption{Convergence of Policy Evaluation}
+% \end{figure}
 
-\begin{figure}[h]
-\includegraphics[scale=0.5]{Value_99}
-\centering
-\caption{Convergence of Policy Evaluation}
-\end{figure}
+% \begin{figure}[h]
+% \includegraphics[scale=0.5]{Value_99}
+% \centering
+% \caption{Convergence of Policy Evaluation}
+% \end{figure}
 
 \noindent
 \textbf{-}
