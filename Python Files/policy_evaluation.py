@@ -58,7 +58,7 @@ def main():
 
     # define variables
     theta = 0.000001
-    discount_factor = 0.99
+    discount_factor = 0.8
 
     # create a grid object
     grid = Gridworld(5)
@@ -66,6 +66,15 @@ def main():
     # initialize a policy: create an array of dimension (number of states by number of actions)
     # for equal probability amongst all actions, divide everything by the number of actions
     policy = np.ones([state_count, action_count]) / action_count
+
+    # # Initiate a random policy
+    # random_policy = np.random.randint(1000, size=(state_count, action_count))
+    # random_policy = random_policy/random_policy.sum(axis=1)[:,None]
+    # policy = random_policy
+
+    # # load optimal policies
+    # policy = np.load("policy_iteration_80.npy")
+
 
     # run policy evaluation
     final_value_map, max_iter, delta, policy = policy_evaluation(grid.valueMap, grid.states, discount_factor, theta, grid.reward, 
@@ -85,7 +94,7 @@ def main():
     plt.title('Policy Evaluation with Discount Factor ' + str(discount_factor))
     plt.xlabel('Iterations')
     plt.ylabel('Max Delta')
-    plt.savefig('graphs/Policy_Evaluation-'+str(discount_factor)+'.png')
+    plt.savefig('graphs/policy_evaluation_'+str(int(discount_factor*100))+'.png')
     plt.show()
 
 if __name__ == "__main__":

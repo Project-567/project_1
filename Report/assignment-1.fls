@@ -27,6 +27,12 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 INPUT /usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /home/aaron/Documents/Hub/project_1/Report/structure.tex
 INPUT /home/aaron/Documents/Hub/project_1/Report/structure.tex
 INPUT /usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
