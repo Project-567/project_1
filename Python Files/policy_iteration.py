@@ -22,14 +22,14 @@ discount_factor = 0.8
 delta_list = []
 
 # UNCOMMENT THE FOLLOWING FOR EVEN POLICY
-# # initialize a policy: create an array of dimension (number of states by number of actions)
-# # for equal probability amongst all actions, divide everything by the number of actions
-# policy = np.ones([state_count, action_count]) / action_count
+# initialize a policy: create an array of dimension (number of states by number of actions)
+# for equal probability amongst all actions, divide everything by the number of actions
+policy = np.ones([state_count, action_count]) / action_count
 
-# Initiate a random policy
-random_policy = np.random.randint(1000, size=(state_count, action_count))
-random_policy = random_policy/random_policy.sum(axis=1)[:,None]
-policy = random_policy
+# # Initiate a random policy
+# random_policy = np.random.randint(1000, size=(state_count, action_count))
+# random_policy = random_policy/random_policy.sum(axis=1)[:,None]
+# policy = random_policy
 
 # create a grid object
 grid = Gridworld(5)
@@ -54,6 +54,7 @@ def calculate_action_value(state, value):
     return A
 
 final_max_iter = 0
+old_policy = np.zeros([state_count, action_count])
 
 # POLICY ITERATION #####################################3
 while True:
@@ -70,7 +71,7 @@ while True:
     # for plotting purpose
     final_max_iter += max_iter
     delta_list.extend(delta)
-
+  
     # POLICY IMPROVEMENT #######################################
         # iterate through every state and choose the best action with the current policy
         # calculate the action values of every state
@@ -101,6 +102,13 @@ while True:
         # update the current policy with the new best action
         policy[state_number] = np.eye(action_count)[best_action]
 
+
+    # check if policy changed
+    if np.array_equal(old_policy, policy):
+        policy_stopped_changing = final_max_iter - max_iter
+    
+    old_policy = policy
+    
     # if the policy is stable (eg. chosen action is the same as best action)
     # then we can exit
     # however, if it is not, then we need to perform policy evaluation and improvement again
@@ -109,6 +117,9 @@ while True:
 
 print("Iterations: ")
 print(final_max_iter)
+
+print("Policy Stopped Changing: ")
+print(policy_stopped_changing)
 
 # PRINT POLICY TABLE ################################################################################
 # import pandas library
