@@ -102,10 +102,10 @@ and (0,-1) means West.
 There are other alternatives for the representation of this problem, for
 example, each cells can be represented with a number from 1 to 25 and actions
 can be represented as letters A = {N, E, W, S} or {up, right, down, left}. These
-type of representations are tidieous to implement. For example, using continuous
+type of representations are tedious to implement. For example, using continuous
 numbers to represent states would be difficult to stop the agent from moving
 off-grid without excessive \textit{if-statements}. In terms of other possible
-actions, one may considerd diagonal actions such as those shown below.
+actions, one may considered diagonal actions such as those shown below.
 
 \begin{equation}
 \text { diagonal actions }=[(1,1),(-1,1),(1,-1),(-1,-1)]
@@ -461,7 +461,7 @@ obtained to at least four decimals.}
 Using an iterative method, the following figure shows the value function
 achieved with a policy that features even probability for all actions. From
 this, it is seen that state A and B featured the highest values at 7.1243 and
-4.7526, respectively, which makese sense as actions from these two states would
+4.7526, respectively, which makes sense as actions from these two states would
 yield a return of +10 and +5. The states towards the bottom of the grid featured
 a negative value as they are far from the high rewarding states mentioned
 previously. Additionally, states (0,0) and (0,2) have different values despite
@@ -518,7 +518,7 @@ As seen in figure 4, different discount factors resulted in different numbers of
 total iterations necessary to converge. In our case, a discount factor of 0.8,
 0.95 and 0.99 have a total iterations of 74, 316, and 1605, respectively. In the
 left column, the convergence graph shows that the max delta decreases
-exponentially over the aforementioned interations to a value that is ultimately
+exponentially over the aforementioned iterations to a value that is ultimately
 within the acceptable threshold.
 \\
 
@@ -670,7 +670,7 @@ The value functions obtained from policy and value iteration are identical for
 each state across all discount factors as seen in figure 6. Both algorithms
 provide larger values than the random policy evaluation, and the difference
 increases as discount factor increases. The reason for this is because during
-policy evaluation, the algoithm finishes when the value of each state converges
+policy evaluation, the algorithm finishes when the value of each state converges
 according to the specific policy. There is no improvement step that would update
 the policy; therefore, the performance of the policy as demonstrated by the
 values in policy evaluation in figure 6 will always be smaller than those from

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1581481453 "assignment-1.tex" "/home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf" "assignment-1" 1581481459
+["pdflatex"] 1581482235 "assignment-1.tex" "/home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf" "assignment-1" 1581482246
   "./pictures/PI_chart.png" 1581481452 118480 bbe5791634508c811a80495851659e19 ""
   "./pictures/VI_chart.png" 1581457015 95449 2df8f58040f79ba338c2666828625eff ""
   "./pictures/bellman_groups.png" 1581384905 7795 8d75849471850afbbc629b8f86ad13fc ""
@@ -8,7 +8,7 @@
   "./pictures/v_evaluation.png" 1581449987 10607 187eeddb691cab88fd7257cdcc2e4cb7 ""
   "./pictures/value_functions.png" 1581473628 469701 31d74c4290b1a2868b5df4cc928ac418 ""
   "/etc/texmf/web2c/texmf.cnf" 1579739462 1101 af7716885e081ab43982cab7b4672c1a ""
-  "/home/aaron/Documents/Hub/project_1/Report/assignment-1.aux" 1581481454 2032 0eebd07fc9ab72e8a1fc6ab4204239b5 ""
+  "/home/aaron/Documents/Hub/project_1/Report/assignment-1.aux" 1581482236 2032 0eebd07fc9ab72e8a1fc6ab4204239b5 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/xcharter/xch_tuu2ww.enc" 1437951022 3152 0dd35f1118812126179f146843070f21 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm" 1136768653 6672 e3ab9e37e925f3045c9005e6d1473d56 ""
@@ -219,8 +219,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1579739465 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1579739484 3858142 64bff84a0068716176e47259e931643d ""
-  "assignment-1.aux" 1581481454 2032 0eebd07fc9ab72e8a1fc6ab4204239b5 ""
-  "assignment-1.tex" 1581481459 29284 6a8c904f38d104711d1f058ab651902f ""
+  "assignment-1.aux" 1581482236 2032 0eebd07fc9ab72e8a1fc6ab4204239b5 ""
+  "assignment-1.tex" 1581482246 29283 e18a67b738001c54d8ecb39e208fa508 ""
   "pictures/PI_chart.png" 1581481452 118480 bbe5791634508c811a80495851659e19 ""
   "pictures/VI_chart.png" 1581457015 95449 2df8f58040f79ba338c2666828625eff ""
   "pictures/bellman_groups.png" 1581384905 7795 8d75849471850afbbc629b8f86ad13fc ""
@@ -230,8 +230,8 @@
   "pictures/value_functions.png" 1581473628 469701 31d74c4290b1a2868b5df4cc928ac418 ""
   "structure.tex" 1581381656 6570 2bb0ee94d7aeeb8eca32600e3ac422ab ""
   (generated)
-  "assignment-1.pdf"
   "/home/aaron/Documents/Hub/project_1/Report/assignment-1.log"
-  "assignment-1.log"
   "assignment-1.aux"
+  "assignment-1.log"
   "/home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf"
+  "assignment-1.pdf"
