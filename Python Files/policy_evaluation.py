@@ -72,10 +72,6 @@ def main():
     # random_policy = random_policy/random_policy.sum(axis=1)[:,None]
     # policy = random_policy
 
-    # # load optimal policies
-    # policy = np.load("policy_iteration_80.npy")
-
-
     # run policy evaluation
     final_value_map, max_iter, delta, policy = policy_evaluation(grid.valueMap, grid.states, discount_factor, theta, grid.reward, 
                                                                     grid.p_transition, grid.transition_prob, policy)

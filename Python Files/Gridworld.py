@@ -45,11 +45,6 @@ class Gridworld():
             reward = 5
         return reward
     
-    def transition_probability(self, current_pos, new_pos):
-        # deterministic environment = s + a has a 100% probability of ending up in s'
-        return 1
-
-    
     def p_transition(self, current_pos, action):
         # return the transition probability
         # get next position: state: [0, 0], action: [0, 1], new_state = [0, 1]

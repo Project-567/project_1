@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2020.1.22)  11 FEB 2020 19:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2020.1.22)  11 FEB 2020 21:19
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1600,118 +1600,183 @@ Underfull \hbox (badness 10000) in paragraph at lines 534--547
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 548--557
+Underfull \hbox (badness 10000) in paragraph at lines 548--554
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 558--561
+Underfull \hbox (badness 10000) in paragraph at lines 555--558
 
  []
 
 [7] <./pictures/VI_chart.png, id=46, 812.03375pt x 928.46875pt>
 File: ./pictures/VI_chart.png Graphic file (type png)
  <use ./pictures/VI_chart.png>
-Package pdftex.def Info: ./pictures/VI_chart.png used on input line 564.
+Package pdftex.def Info: ./pictures/VI_chart.png used on input line 561.
 (pdftex.def)             Requested size: 406.01588pt x 464.23325pt.
  [8 <./pictures/VI_chart.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 574--576
+Underfull \hbox (badness 10000) in paragraph at lines 571--573
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 577--582
+Underfull \hbox (badness 10000) in paragraph at lines 574--579
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 583--596
+Underfull \hbox (badness 10000) in paragraph at lines 580--593
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 597--602
+Underfull \hbox (badness 10000) in paragraph at lines 594--599
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 603--611
+Underfull \hbox (badness 10000) in paragraph at lines 600--608
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 612--618
+Underfull \hbox (badness 10000) in paragraph at lines 609--615
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 619--626
+Underfull \hbox (badness 10000) in paragraph at lines 616--623
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 627--633
+Underfull \hbox (badness 10000) in paragraph at lines 624--630
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 634--637
+Underfull \hbox (badness 10000) in paragraph at lines 631--634
 
  []
 
-[9] <./pictures/PI_chart.png, id=53, 892.33376pt x 937.5025pt>
+[9] <./pictures/PI_chart.png, id=53, 812.03375pt x 891.33pt>
 File: ./pictures/PI_chart.png Graphic file (type png)
  <use ./pictures/PI_chart.png>
-Package pdftex.def Info: ./pictures/PI_chart.png used on input line 640.
-(pdftex.def)             Requested size: 446.16579pt x 468.7501pt.
+Package pdftex.def Info: ./pictures/PI_chart.png used on input line 637.
+(pdftex.def)             Requested size: 406.01588pt x 445.66391pt.
  [10 <./pictures/PI_chart.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 652--654
+Underfull \hbox (badness 10000) in paragraph at lines 649--651
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 655--662
+Underfull \hbox (badness 10000) in paragraph at lines 652--655
+
+ []
+
+<./pictures/value_functions.png, id=57, 1791.69376pt x 837.1275pt>
+File: ./pictures/value_functions.png Graphic file (type png)
+ <use ./pictures/value_functions.png>
+Package pdftex.def Info: ./pictures/value_functions.png used on input line 657.
+(pdftex.def)             Requested size: 456.88954pt x 213.47107pt.
+
+Overfull \hbox (1.64543pt too wide) in paragraph at lines 657--659
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 662--669
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 663--670
+Underfull \hbox (badness 10000) in paragraph at lines 670--679
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 671--677
+Underfull \hbox (badness 10000) in paragraph at lines 680--687
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 678--685
+Underfull \hbox (badness 10000) in paragraph at lines 688--696
 
  []
 
-[11] <./pictures/transition_matrix.png, id=60, 823.075pt x 583.17876pt>
+
+Underfull \hbox (badness 10000) in paragraph at lines 697--707
+
+ []
+
+[11 <./pictures/value_functions.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 708--714
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 715--721
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 722--728
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 729--736
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 737--743
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 744--750
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 751--754
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 755--761
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 762--774
+
+ []
+
+[12] [13] <./pictures/transition_matrix.png, id=68, 823.075pt x 583.17876pt>
 File: ./pictures/transition_matrix.png Graphic file (type png)
  <use ./pictures/transition_matrix.png>
-Package pdftex.def Info: ./pictures/transition_matrix.png used on input line 692.
+Package pdftex.def Info: ./pictures/transition_matrix.png used on input line 780.
 (pdftex.def)             Requested size: 411.53648pt x 291.58867pt.
- [12 <./pictures/transition_matrix.png>] (/home/aaron/Documents/Hub/project_1/Report/assignment-1.aux)
+ [14 <./pictures/transition_matrix.png>] (/home/aaron/Documents/Hub/project_1/Report/assignment-1.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 26628 strings out of 493029
- 497025 string characters out of 6136234
+ 26633 strings out of 493029
+ 497183 string characters out of 6136234
  555011 words of memory out of 5000000
- 29711 multiletter control sequences out of 15000+600000
+ 29715 multiletter control sequences out of 15000+600000
  93831 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  69i,9n,80p,10496b,1244s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/xcharter/xch_tuu2ww.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/xcharter/XCharter-Bold.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/xcharter/XCharter-Italic.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/xcharter/XCharter-Roman.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on /home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf (12 pages, 461656 bytes).
+Output written on /home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf (14 pages, 831625 bytes).
 PDF statistics:
- 108 PDF objects out of 1000 (max. 8388607)
- 73 compressed objects within 1 object stream
+ 116 PDF objects out of 1000 (max. 8388607)
+ 78 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 43 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
