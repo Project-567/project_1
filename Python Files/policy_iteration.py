@@ -7,7 +7,6 @@ import numpy as np
 from random import randint
 from random import randrange
 
-
 # display output
 from random import uniform
 import time
@@ -23,23 +22,16 @@ theta = 0.000001
 discount_factor = 0.99
 delta_list = []
 
-# UNCOMMENT THE FOLLOWING FOR EVEN POLICY
+# UNCOMMENT THE FOLLOWING FOR EVENLY DISTRIBUTED POLICY
 # initialize a policy: create an array of dimension (number of states by number of actions)
 # for equal probability amongst all actions, divide everything by the number of actions
 # policy = np.ones([state_count, action_count]) / action_count
 
-
-# initate a policy like [0, 1, 0, 0]
+# initate a random policy like: [0, 1, 0, 0] (randomly chosen action)
 policy = np.zeros([state_count, action_count])
 for i in range(len(policy)):
     random_number = randrange(4)
     policy[i][random_number] = 1
-
-
-# # Initiate a random policy
-# random_policy = np.random.randint(1000, size=(state_count, action_count))
-# random_policy = random_policy/random_policy.sum(axis=1)[:,None]
-# policy = random_policy
 
 # create a grid object
 grid = Gridworld(5)
@@ -63,10 +55,9 @@ def calculate_action_value(state, value):
     
     return A
 
+# define some basic parameters
 final_max_iter = 0
 old_policy = np.zeros([state_count, action_count])
-
-# set value map
 final_value_map = grid.valueMap
 
 # POLICY ITERATION #####################################3
@@ -170,10 +161,6 @@ print(policy_table)
 print("Value Map: ")
 np.set_printoptions(precision=4)
 print(final_value_map)
-
-# print("Policy: ")
-# print(policy)
-# np.save("policy_iteration_80", policy)
 
 # PRINT DELTA PLOT #####################################################################
 import matplotlib.pyplot as plt
