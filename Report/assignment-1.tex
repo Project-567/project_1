@@ -179,7 +179,7 @@ receives a reward of 1.
 \noindent
 By having a different reward function, the overall optimization problem is different.
 As a result, this is the only reward function that leads to optimal
-behaviour as described in the problem description.
+behaviour as described in the problem description. <DOES MULTIPLES OF THE SAME GENERATE THE SAME BEHAVIOUR?>
 
 \begin{equation}
 \left[\begin{array}{c}
@@ -219,27 +219,32 @@ them) What do you think is/are the optimal policy/policies for this problem,
 and why (you do NOT need to solve the Bellman equations)?}
 \\
 
-% \noindent
-% Since the goal is maximizing reward, optimal policy always looks for A or B to
-% get +10 or +5 reward. If the initial state is away from row 0 where A and B are
-% located, such as row 4, the optimal policy requires more actions to get to the
-% vicinity of A or B. If the initial state is in the vicinity of A and B, there is
-% a tradeoff between more actions towards A and earning discounted +5 more reward
-% from A->A’ compared to B->B’.
-% \\
+
 
 \noindent
-To write the Bellman equations for this problem, we have grouped together states with similar
-value functions. The different groups are shown in color in the following figure.
+To write the Bellman equations for this problem, we have grouped together states
+with similar value functions as represented by the different colors in the figure below.
+<STATE THE INTUITION BEHIND THE PRESENTED GROUPING>
+\\
+
+\noindent
+Since the goal is maximizing reward, optimal policy always looks for A or B to
+gain +10 or +5 reward. If the initial state is away from row 0 where A and B are
+located, such as row 4, the optimal policy would direct the agent to the
+vicinity of A or B. If the initial state is in the vicinity of A and B, there is
+a tradeoff between more actions towards A and earning discounted +5 more reward
+from A->A’ compared to B->B’.
+\\
 
 \begin{figure}[h]
-\includegraphics[scale=0.5]{bellman_groups}
+\includegraphics[scale=0.4]{bellman_groups}
 \centering
-\caption{Groups of Bellman Equations}
+\caption{Groups of Bellman equations}
 \end{figure}
 
 \noindent
-The following shows the Bellman equation.
+The following shows the Bellman equation, while equation (8) to (18) shows the different
+equations grouped by the colors presented in the above figure.
 
 \begin{equation}
 v_{\pi}(s)=\sum_{a} \pi(a | s) \sum_{s^{\prime}, r} p\left(s^{\prime}, r | s, a\right)\left[r+\gamma v_{\pi}\left(s^{\prime}\right)\right]
@@ -372,7 +377,6 @@ The following represents the value function for state (4,4).
 
 
 % 2---------------------------------------------------------------
-\newpage
 \noindent
 \textbf{2}
 \noindent
@@ -405,15 +409,6 @@ probability of a transition (s; a; s') from state s to state s' when taking acti
         return self.states
 \end{lstlisting}
 
-\lstset{caption={Returns probability of transition from $s$ to $s'$ given $a$}}
-\lstset{label={lst:code_direct}}
-\lstset{basicstyle=\footnotesize}
-\begin{lstlisting}
-    def transition_probability(self, current_pos, new_pos):
-        # deterministic environment = s + a has a 100% probability of ending up in s'
-        return 1
-\end{lstlisting}
-
 \lstset{caption={Returns a reward given current position and action }}
 \lstset{label={lst:code_direct}}
 \lstset{basicstyle=\footnotesize}
@@ -435,6 +430,24 @@ probability of a transition (s; a; s') from state s to state s' when taking acti
         return reward
 \end{lstlisting}
 
+\lstset{caption={Returns the next state, $s'$, given $a$ in state $s$}}
+\lstset{label={lst:code_direct}}
+\lstset{basicstyle=\footnotesize}
+\begin{lstlisting}
+    def p_transition(self, current_pos, action):
+        self.new_pos = np.array(current_pos) + np.array(action)
+        # if taking an action crosses the border = agent stays in same position
+        if -1 in self.new_pos or self.size in self.new_pos: 
+            self.new_pos = current_pos
+        # if in state A, transition to state A'
+        if current_pos == [0, 1]:
+            self.new_pos = [4, 1]
+        # if in state B, transition to state B'
+        if current_pos == [0, 3]:
+            self.new_pos = [2, 3]
+        return self.new_pos
+\end{lstlisting}
+
 
 % POLICY EVALUATION---------------------------------------------------------------
 \newpage
@@ -447,30 +460,40 @@ obtained to at least four decimals.}
 \\
 
 \noindent
-Following value function is generated based on equal action probability, and  =
-0.99. The value function found using an iterative method is as follow:
-\\
+Using an iterative method, the following figure shows the value function
+achieved with a policy that features even probability for all actions. From
+this, it is seen that state A and B featured the highest values at 7.1243 and
+4.7526, respectively, which makese sense as actions from these two states would
+yield a return of +10 and +5. The states towards the bottom of the grid featured
+a negative value as they are far from the high rewarding states mentioned
+previously. Additionally, states (0,0) and (0,2) have different values despite
+being both one cell away from state A because state (0,0) has a higher chance of
+going off-grid than state (0,2).
+
 
 \begin{figure}[h]
 \includegraphics[scale=0.6]{v_evaluation}
 \centering
-\caption{Value Function using Policy Evaluation}
+\caption{Value function using policy evaluation}
 \end{figure}
+
+\noindent
+The following shows a graph of the change in max delta over iterations. From
+this, it is seen that the policy evaluation algorithm was able to converge in
+roughly 900 iterations with a threshold of $10^{-6}$. \\
 
 \begin{figure}[h]
 \includegraphics[scale=0.7]{policy_evaluation_99}
 \centering
-\caption{Convergence of Policy Evaluation}
+\caption{Convergence of policy evaluation}
 \end{figure}
 
 
 % VALUE ITERATION---------------------------------------------------------------
 \newpage
 \section{Value Iteration}
-\textbf{The goal now is to solve the MDP above using dynamic programming. In a separate
-file called value iteration.py, provide a complete implementation of the value
-iteration algorithm you learned in class for solving the Bellman equations you
-derived earlier.}
+\textbf{In a separate file called value\_iteration.py, provide a complete
+implementation of the value iteration.}
 \\
 
 \noindent
@@ -480,9 +503,25 @@ derived earlier.}
 \\
 
 \noindent
+In this work, the value iteration algorithm was used to find the optimal policy
+at 3 different discount factors; namely, 0.8, 0.95 and 0.99. In our case, the
+value iteration algorithm converged at all discount factors with a threshold of
+$10^{-6}$ as described in the problem.\\
+
+
+\noindent
 \textbf{-}
 \noindent
 \textbf{How many iterations did this take for each value of $\gamma$ ?}
+\\
+
+\noindent
+As seen in figure 4, different discount factors resulted in different numbers of
+total iterations necessary to converge. In our case, a discount factor of 0.8,
+0.95 and 0.99 have a total iterations of 74, 316, and 1605, respectively. In the
+left column, the convergence graph shows that the max delta decreases
+exponentially over the aforementioned interations to a value that is ultimately
+within the acceptable threshold.
 \\
 
 \noindent
@@ -493,28 +532,46 @@ obtained for each value of $\gamma$?}
 \\
 
 \noindent
+In terms of iterations, the best discount factor is 0.8 as it converged the
+fastest. In terms of policy that favors long term rewards, 0.95 is better than
+0.99 as both achieved the same optimal policy while 0.95 took only 20\% of the
+time it took 0.99 to converge. While the policy is the same in most states, the
+main difference between the optimal policy with 0.8 discount factor and
+0.95/0.99 discount factor are states (1,3) and (1,4). In discount factor 0.8,
+the policy outputs "up" in these states because it is favoring short term
+rewards by reaching state B (0,3) for a +5 reward. Conversely, the agent favors
+long term rewards for discount factor 0.95/0.99; therefore, the policy outputs
+"left" in the aforementioned states, helping the agent to skip state B and reach
+state A. The full policy for each discount factor can be seen in figure 4.
+\\
+
+\noindent
 \textbf{-}
+Similar to value iteration, policy iteration was implemented in this work and
+tested with the same 3 discount factors, 0.8, 0.95 and 0.99. In our case, all
+three discount factors converged.
 \noindent
 \textbf{Does the optimal policy you obtained correspond to the policy you
 conjectured earlier?}
 \\
 
+\noindent
+Yes, it does.
+\\
 
+\newpage
 \begin{figure}[h]
-\includegraphics[scale=0.48]{VI_chart}
+\includegraphics[scale=0.5]{VI_chart}
 \centering
-\caption{Value Iteration results}
+\caption{Value iteration results: convergence graph, total iterations, optimal policy}
 \end{figure}
-
-
 
 
 % POLICY ITERATION---------------------------------------------------------------
 \newpage
 \section{Policy Iteration}
-\textbf{Repeat the previous part of the assignment, but now implement the policy
-iteration algorithm from class in a file called policy iteration.py. Report your
-results and answer all questions as in the previous part.}
+\textbf{Implement the policy iteration algorithm in a file called
+policy\_iteration.py.}
 \\
 
 \noindent
@@ -524,10 +581,33 @@ results and answer all questions as in the previous part.}
 \\
 
 \noindent
+Similar to value iteration, policy iteration was implemented in this work and
+tested with the same 3 discount factors, 0.8, 0.95 and 0.99. In our case, all
+three discount factors converged. The convergence graph is seen in the left
+column of figure 5. Because policy iteration consists of 2 steps: policy
+evaluation and policy improvement, the evaluation part first converges on a
+value function and then the improvement step extracts a policy from the value
+function. The algorithm then takes this policy to create a new value function
+that is then used to extract a new policy. This process repeats until the policy
+becomes stable. Because of this two step process. the convergence graph shows
+different spikes which represents the iteration where a new policy is being
+evaluated.
+\\
+
+\noindent
 \textbf{-}
 \noindent
 \textbf{How many iterations did this take for each value of $\gamma$ ?}
 \\
+
+\noindent
+Different discount factor values led to different numbers of iterations for
+convergence. As seen in figure 5, discount factors of 0.8, 0.95 and 0.99 have
+total iterations of 192, 1447 and 7349, respectively. It is also worth noting
+that the policy often converges faster than the values as shown in the brackets
+in the second column of figure 5. In this case, the policy converged in 118,
+1131 and 5744 iterations for discount factors of 0.8, 0.95 and 0.99
+respectively. \\
 
 \noindent
 \textbf{-}
@@ -537,16 +617,29 @@ obtained for each value of $\gamma$?}
 \\
 
 \noindent
+Similar to value iteration, the best discount factor value in terms of number of
+iterations is 0.8 as it converged the fastest. In terms of favoring future
+rewards, similar behaviour to value iteration is seen here as well where 0.95
+converged much faster than 0.99 while the final optimal policy between the two
+remain identical. The final optimal policy for each discount factor is presented
+in figure 5. \\
+
+\noindent
 \textbf{-}
 \noindent
 \textbf{Does the optimal policy you obtained correspond to the policy you
 conjectured earlier?}
 \\
 
+\noindent
+Yes, it does.
+\\
+
+\newpage
 \begin{figure}[h]
-\includegraphics[scale=0.48]{PI_chart}
+\includegraphics[scale=0.5]{PI_chart}
 \centering
-\caption{Policy Iteration results}
+\caption{Policy iteration results: convergence graph, total iterations, optimal policy}
 \end{figure}
 
 
