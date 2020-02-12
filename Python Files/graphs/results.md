@@ -89,9 +89,9 @@ Value Function:
 
 ## Policy Iteration with Random Policy, Discount Factor 0.99:
 
-Iterations: 7349
+Iterations: 2989
 
-Policy Stopped Changing: 5744
+Policy Stopped Changing: 2988
 
 Value Map: 
 [[201.9998 204.0402 201.9998 199.0402 197.0498]
@@ -110,9 +110,9 @@ Policy Table:
 
 ## Policy Iteration with Random Policy, Discount Factor 0.95:
 
-Iterations: 1447
+Iterations: 874
 
-Policy Stopped Changing: 1131
+Policy Stopped Changing: 873
 
 Value Map: 
 [[41.9947 44.2049 41.9947 39.2049 37.2447]
@@ -131,9 +131,9 @@ Policy Table:
 
 ## Policy Iteration with Random Policy, Discount Factor 0.8:
 
-Iterations: 192
+Iterations: 140
 
-Policy Stopped Changing: 118
+Policy Stopped Changing: 139
 
 Value Map: 
 [[11.8991 14.8739 11.8991 10.2459  8.1967]

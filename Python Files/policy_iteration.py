@@ -20,7 +20,7 @@ state_count = gridSize*gridSize # total number of states
 
 # iterations = 0
 theta = 0.000001
-discount_factor = 0.8
+discount_factor = 0.99
 delta_list = []
 
 # UNCOMMENT THE FOLLOWING FOR EVEN POLICY
@@ -66,6 +66,9 @@ def calculate_action_value(state, value):
 final_max_iter = 0
 old_policy = np.zeros([state_count, action_count])
 
+# set value map
+final_value_map = grid.valueMap
+
 # POLICY ITERATION #####################################3
 while True:
     
@@ -75,7 +78,7 @@ while True:
         # Replace the value map with the calculated value.
 
     # run policy evaluation
-    final_value_map, max_iter, delta, policy = policy_evaluation(grid.valueMap, grid.states, discount_factor, theta, grid.reward, 
+    final_value_map, max_iter, delta, policy = policy_evaluation(final_value_map, grid.states, discount_factor, theta, grid.reward, 
                                                                     grid.p_transition, grid.transition_prob, policy)
 
     # for plotting purpose
@@ -116,7 +119,6 @@ while True:
     # check if policy changed
     if np.array_equal(old_policy, policy):
         policy_stopped_changing = final_max_iter - max_iter
-    
     old_policy = policy
     
     # if the policy is stable (eg. chosen action is the same as best action)
