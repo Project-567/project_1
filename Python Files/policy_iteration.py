@@ -5,6 +5,8 @@ from Gridworld import Gridworld
 from policy_evaluation import policy_evaluation
 import numpy as np
 from random import randint
+from random import randrange
+
 
 # display output
 from random import uniform
@@ -22,14 +24,22 @@ discount_factor = 0.99
 delta_list = []
 
 # UNCOMMENT THE FOLLOWING FOR EVEN POLICY
-# # initialize a policy: create an array of dimension (number of states by number of actions)
-# # for equal probability amongst all actions, divide everything by the number of actions
+# initialize a policy: create an array of dimension (number of states by number of actions)
+# for equal probability amongst all actions, divide everything by the number of actions
 # policy = np.ones([state_count, action_count]) / action_count
 
-# Initiate a random policy
-random_policy = np.random.randint(1000, size=(state_count, action_count))
-random_policy = random_policy/random_policy.sum(axis=1)[:,None]
-policy = random_policy
+
+# initate a policy like [0, 1, 0, 0]
+policy = np.zeros([state_count, action_count])
+for i in range(len(policy)):
+    random_number = randrange(4)
+    policy[i][random_number] = 1
+
+
+# # Initiate a random policy
+# random_policy = np.random.randint(1000, size=(state_count, action_count))
+# random_policy = random_policy/random_policy.sum(axis=1)[:,None]
+# policy = random_policy
 
 # create a grid object
 grid = Gridworld(5)
@@ -54,6 +64,10 @@ def calculate_action_value(state, value):
     return A
 
 final_max_iter = 0
+old_policy = np.zeros([state_count, action_count])
+
+# set value map
+final_value_map = grid.valueMap
 
 # POLICY ITERATION #####################################3
 while True:
@@ -64,13 +78,13 @@ while True:
         # Replace the value map with the calculated value.
 
     # run policy evaluation
-    final_value_map, max_iter, delta, policy = policy_evaluation(grid.valueMap, grid.states, discount_factor, theta, grid.reward, 
+    final_value_map, max_iter, delta, policy = policy_evaluation(final_value_map, grid.states, discount_factor, theta, grid.reward, 
                                                                     grid.p_transition, grid.transition_prob, policy)
 
     # for plotting purpose
     final_max_iter += max_iter
     delta_list.extend(delta)
-
+  
     # POLICY IMPROVEMENT #######################################
         # iterate through every state and choose the best action with the current policy
         # calculate the action values of every state
@@ -101,6 +115,12 @@ while True:
         # update the current policy with the new best action
         policy[state_number] = np.eye(action_count)[best_action]
 
+
+    # check if policy changed
+    if np.array_equal(old_policy, policy):
+        policy_stopped_changing = final_max_iter - max_iter
+    old_policy = policy
+    
     # if the policy is stable (eg. chosen action is the same as best action)
     # then we can exit
     # however, if it is not, then we need to perform policy evaluation and improvement again
@@ -109,6 +129,9 @@ while True:
 
 print("Iterations: ")
 print(final_max_iter)
+
+print("Policy Stopped Changing: ")
+print(policy_stopped_changing)
 
 # PRINT POLICY TABLE ################################################################################
 # import pandas library
@@ -145,7 +168,12 @@ for state in range(len(policy)):
 print("Policy Table: ")
 print(policy_table)
 print("Value Map: ")
+np.set_printoptions(precision=4)
 print(final_value_map)
+
+# print("Policy: ")
+# print(policy)
+# np.save("policy_iteration_80", policy)
 
 # PRINT DELTA PLOT #####################################################################
 import matplotlib.pyplot as plt
@@ -154,5 +182,5 @@ plt.plot(range(final_max_iter), delta_list)
 plt.title('Policy Iteration with Discount Factor ' + str(discount_factor))
 plt.xlabel('Iterations')
 plt.ylabel('Max Delta')
-plt.savefig('graphs/Policy-'+str(discount_factor)+'.png')
+plt.savefig('graphs/policy_iteration_'+str(int(discount_factor*100))+'.png')
 plt.show()

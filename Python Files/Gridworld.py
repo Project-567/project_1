@@ -45,10 +45,6 @@ class Gridworld():
             reward = 5
         return reward
     
-    # def transition_probability(self, current_pos, new_pos):
-        # a function that returns the entries of the transition probability matrix?
-        # eg. input current state, new state, output = 0.25...0.5...1 ... etc. ?
-    
     def p_transition(self, current_pos, action):
         # return the transition probability
         # get next position: state: [0, 0], action: [0, 1], new_state = [0, 1]

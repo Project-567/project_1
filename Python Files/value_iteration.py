@@ -19,7 +19,7 @@ state_count = gridSize*gridSize # total number of states
 
 iterations = 0
 theta = 0.000001
-discount_factor = 0.99
+discount_factor = 0.8
 delta_list = []
 
 # UNCOMMENT THE FOLLOWING FOR EVEN POLICY
@@ -136,7 +136,12 @@ for state in range(len(policy)):
 print("Policy Table: ")
 print(policy_table)
 print("Value Map: ")
+np.set_printoptions(precision=4)
 print(grid.valueMap)
+# print("Policy: ")
+# print(policy)
+# np.save("value_iteration_80", policy)
+
 
 # PRINT DELTA PLOT #####################################################################
 import matplotlib.pyplot as plt
@@ -145,5 +150,5 @@ plt.plot(range(iterations), delta_list)
 plt.title('Value Iteration with Discount Factor ' + str(discount_factor))
 plt.xlabel('Iterations')
 plt.ylabel('Max Delta')
-plt.savefig('graphs/Value-'+str(discount_factor)+'.png')
+plt.savefig('graphs/value_iteration_'+str(int(discount_factor*100))+'.png')
 plt.show()
