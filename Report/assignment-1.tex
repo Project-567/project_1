@@ -381,11 +381,8 @@ The following represents the value function for state (4,4).
 \noindent
 \textbf{2}
 \noindent
-\textbf{Now, in a Python file called Gridworld.py, create a class that replicates
-the behaviour of the MDP you formulated in the previous question. Your class
-should contain four functions: one to return the initial state of the MDP, one to
-return a view of all possible states, and two to return, respectively, the reward and
-probability of a transition (s; a; s') from state s to state s' when taking action a.}
+\textbf{Now, in a Python file called Gridworld.py, create a class that
+replicates the behaviour of the MDP.}
 \\
 
 \lstset{language=Python}
@@ -475,7 +472,7 @@ going off-grid than state (0,2).
 \begin{figure}[h]
 \includegraphics[scale=0.6]{v_evaluation}
 \centering
-\caption{Value function using policy evaluation}
+\caption{Value function using policy evaluation with discount factor 0.99}
 \end{figure}
 
 \noindent
@@ -561,7 +558,7 @@ Yes, it does.
 \begin{figure}[h]
 \includegraphics[scale=0.5]{VI_chart}
 \centering
-\caption{Value iteration results: convergence graph, total iterations, optimal policy}
+\caption{Value iteration results: delta function graph, total iterations, optimal policy}
 \end{figure}
 
 
@@ -601,10 +598,10 @@ evaluated.
 \noindent
 Different discount factor values led to different numbers of iterations for
 convergence. As seen in figure 5, discount factors of 0.8, 0.95 and 0.99 have
-total iterations of 192, 1447 and 7349, respectively. It is also worth noting
+total iterations of 139, 874 and 2989, respectively. It is also worth noting
 that the policy often converges faster than the values as shown in the brackets
-in the second column of figure 5. In this case, the policy converged in 118,
-1131 and 5744 iterations for discount factors of 0.8, 0.95 and 0.99
+in the second column of figure 5. In this case, the policy was found in 139,
+873 and 2988 iterations for discount factors of 0.8, 0.95 and 0.99
 respectively. \\
 
 \noindent
@@ -637,7 +634,7 @@ Yes, it does.
 \begin{figure}[h]
 \includegraphics[scale=0.5]{PI_chart}
 \centering
-\caption{Policy iteration results: convergence graph, total iterations, optimal policy}
+\caption{Policy iteration results: delta function, total iterations, optimal policy}
 \end{figure}
 
 
@@ -691,10 +688,10 @@ your results differ for different values of the parameter(s) (e.g. $\gamma$)?}
 We obtained the same value functions and policies from both value and policy
 iteration. Our results showed that value iteration required less number of
 iterations than policy iteration. For example, when discount factor is 0.99, the
-number of iterations of policy iteration is 7349 and value iteration is 1605;
+number of iterations of policy iteration is 2988 and value iteration is 1605;
 when discount factor is 0.95, the number of iterations of policy iteration is
-1447 and value iteration is 316; when discount factor is 0.80, the number of
-iterations of policy iteration is 192 and value iteration is 74. These results
+874 and value iteration is 316; when discount factor is 0.80, the number of
+iterations of policy iteration is 140 and value iteration is 74. These results
 showed that within the same algorithm, the number of iterations to converge
 decreases as the discount factor decreases. This is because as the discount
 factor decreases, so does the agent's consideration of future rewards. This way,
@@ -739,9 +736,10 @@ Additionally, policy iteration also requires backing up more variables.
 Value iterations has shown to have less iterations for each discount factor;
 however, policy iteration is able to find the optimal policy before the value
 converges. For example, for a discount factor of 0.99, optimal policy was found
-1605 iterations before value converges. Because of this, policy iterations would
-work better when the problem is scaled up since optimal policy is always found
-before the value function converges.\\
+1 iteration before value converges (for bigger problems, there could be a bigger
+difference). Because of this, policy iterations would work better when the
+problem is scaled up since optimal policy is always found before the value
+function converges.\\
 
 \noindent
 \textbf{-}
