@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1581457211 "assignment-1.tex" "/home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf" "assignment-1" 1581457249
+["pdflatex"] 1581466042 "assignment-1.tex" "/home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf" "assignment-1" 1581466075
   "./pictures/PI_chart.png" 1581457049 136786 52aa592567a548f1768fd7c1852870b5 ""
   "./pictures/VI_chart.png" 1581457015 95449 2df8f58040f79ba338c2666828625eff ""
   "./pictures/bellman_groups.png" 1581384905 7795 8d75849471850afbbc629b8f86ad13fc ""
@@ -7,7 +7,7 @@
   "./pictures/transition_matrix.png" 1581383456 36379 2df35ec7e1526bb6983648c926603a70 ""
   "./pictures/v_evaluation.png" 1581449987 10607 187eeddb691cab88fd7257cdcc2e4cb7 ""
   "/etc/texmf/web2c/texmf.cnf" 1579739462 1101 af7716885e081ab43982cab7b4672c1a ""
-  "/home/aaron/Documents/Hub/project_1/Report/assignment-1.aux" 1581457212 1747 7d3f324321c9f2684e0eaff7a745208f ""
+  "/home/aaron/Documents/Hub/project_1/Report/assignment-1.aux" 1581466043 1847 16a396918df67cf560d720bc6d2f4740 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/xcharter/xch_tuu2ww.enc" 1437951022 3152 0dd35f1118812126179f146843070f21 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1272929888 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm" 1136768653 6672 e3ab9e37e925f3045c9005e6d1473d56 ""
@@ -52,6 +52,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb" 1248133631 32726 0a1aea6fcd6468ee2cf64d891f5c43c8 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1248133631 32626 4f5c1b83753b1dd3a97d1b399a005b4b ""
@@ -217,8 +218,8 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1503343927 31343 93828589fb0cea665e553ee5a17ad2d4 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1579739465 1863403 f3ff9a4253bcb5fb9a9baaf0c572cb01 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1579739484 3858142 64bff84a0068716176e47259e931643d ""
-  "assignment-1.aux" 1581457212 1747 7d3f324321c9f2684e0eaff7a745208f ""
-  "assignment-1.tex" 1581457249 20065 63b347c195ab6768fd2eb5d40ca4ecc3 ""
+  "assignment-1.aux" 1581466043 1847 16a396918df67cf560d720bc6d2f4740 ""
+  "assignment-1.tex" 1581466075 24743 6c6d4a3684de105f711b46343c4f25db ""
   "pictures/PI_chart.png" 1581457049 136786 52aa592567a548f1768fd7c1852870b5 ""
   "pictures/VI_chart.png" 1581457015 95449 2df8f58040f79ba338c2666828625eff ""
   "pictures/bellman_groups.png" 1581384905 7795 8d75849471850afbbc629b8f86ad13fc ""
@@ -227,8 +228,8 @@
   "pictures/v_evaluation.png" 1581449987 10607 187eeddb691cab88fd7257cdcc2e4cb7 ""
   "structure.tex" 1581381656 6570 2bb0ee94d7aeeb8eca32600e3ac422ab ""
   (generated)
-  "/home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf"
+  "assignment-1.pdf"
   "/home/aaron/Documents/Hub/project_1/Report/assignment-1.log"
   "assignment-1.log"
   "assignment-1.aux"
-  "assignment-1.pdf"
+  "/home/aaron/Documents/Hub/project_1/Report/assignment-1.pdf"
