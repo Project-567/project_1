@@ -155,7 +155,7 @@ to the same optimal behaviour}
 \\
 
 \noindent
-The reward function privided is by the problem is shown below. In this case, a
+The reward function provided is by the problem is shown below. In this case, a
 transition from A to A' and B to B' will yield a reward of 10 and 5,
 respectively. A transition that would take the agent off grid would result in a
 reward of -1 while all other transitions yield a reward of zero. 
@@ -174,12 +174,14 @@ this results in a coordinate (0, -1) that featured an element smaller than the
 grid column/row size. Conversely, in equation (6), the agent took an action
 going to the right when in state (0, 4) which resulted in the next state, (0,
 5), with an element larger than the row/column size. In these cases, the agent
-receives a reward of 1.
+receives a reward of -1.\\
 
 \noindent
-By having a different reward function, the overall optimization problem is different.
-As a result, this is the only reward function that leads to optimal
-behaviour as described in the problem description. <DOES MULTIPLES OF THE SAME GENERATE THE SAME BEHAVIOUR?>
+By having a different reward function, the overall optimization problem is
+different. As a result, this is the only reward function that leads to optimal
+behaviour as described in the problem description. As a side note, multiples of
+the reward function would give the same value functions and optimal policy since
+the proportionality remains the same. \\
 
 \begin{equation}
 \left[\begin{array}{c}
@@ -219,13 +221,12 @@ them) What do you think is/are the optimal policy/policies for this problem,
 and why (you do NOT need to solve the Bellman equations)?}
 \\
 
-
-
 \noindent
 To write the Bellman equations for this problem, we have grouped together states
-with similar value functions as represented by the different colors in the figure below.
-<STATE THE INTUITION BEHIND THE PRESENTED GROUPING>
-\\
+with similar value functions as represented by the different colors in the
+figure below. More specifically, they are grouped based on the term $r+ \gamma
+v(s’)$; therefore, each group has the same pattern in the combination of $r$ and
+$s’$ for given action. \\
 
 \noindent
 Since the goal is maximizing reward, optimal policy always looks for A or B to
@@ -258,7 +259,7 @@ The following represents the value function for state (0, 0)
 \begin{equation}
 \begin{array}{c}
 {P([0,-1] |(i, j))(-1+\gamma v(i, j))+P([-1,0] |(i, j))(-1+\gamma v(i, j))} \\
-{+P([0,+1](i, j))(0+\gamma v(i, j+1))+P([+1, 0] |(i, j))(0+\gamma v(i+1, j))} \\
+{+P([0,+1]|(i, j))(0+\gamma v(i, j+1))+P([+1, 0] |(i, j))(0+\gamma v(i+1, j))} \\
 {\quad \text { for } i \in\{0\}, j \in\{0\}}
 \end{array}
 \end{equation}
@@ -668,14 +669,15 @@ an action at random (as you analyzed earlier), and comment on the difference.}
 \\
 
 \noindent
-The value functions obtained from both algorithms are identical for each state
-across all discount factors as seen in figure 6. Both algorithms provide larger
-values than the random policy evaluation (figure 2), and the difference
-increases as discount factor increases. Even if the random policy were the
-optimal policy, the state value will always be lower in policy evaluation
-because there is no improvement step. This is because state values won’t
-increase as they are being updated, which causes its performance to be inferior
-to the iterative methods. \\
+The value functions obtained from policy and value iteration are identical for
+each state across all discount factors as seen in figure 6. Both algorithms
+provide larger values than the random policy evaluation, and the difference
+increases as discount factor increases. The reason for this is because during
+policy evaluation, the algoithm finishes when the value of each state converges
+according to the specific policy. There is no improvement step that would update
+the policy; therefore, the performance of the policy as demonstrated by the
+values in policy evaluation in figure 6 will always be smaller than those from
+policy and value iteration.\\
 
 \noindent
 \textbf{-}
@@ -692,7 +694,12 @@ iterations than policy iteration. For example, when discount factor is 0.99, the
 number of iterations of policy iteration is 7349 and value iteration is 1605;
 when discount factor is 0.95, the number of iterations of policy iteration is
 1447 and value iteration is 316; when discount factor is 0.80, the number of
-iterations of Policy iteration is 192 and Value Iteration is 74.\\
+iterations of policy iteration is 192 and value iteration is 74. These results
+showed that within the same algorithm, the number of iterations to converge
+decreases as the discount factor decreases. This is because as the discount
+factor decreases, so does the agent's consideration of future rewards. This way,
+the value function is updated less at each time step which leads to faster
+convergence. \\
 
 \noindent
 The extra iteration count during policy iteration is due to policy evaluation.
@@ -722,17 +729,19 @@ do you think would work better if the problem was scaled up?}
 \noindent
 Between policy and value iteration, policy iteration was more difficult to
 implement because it required more steps (policy evaluation and improvement).
-More specifically, the policy evaluation must first sweeps through every state
+More specifically, the policy evaluation must first sweep through every state
 to converge on a value for each state and then the improvement algorithm must
-sweep through every state to find the best action to take in each state.\\
+sweep through every state again to find the best action to take in each state.
+Additionally, policy iteration also requires backing up more variables.
+\\
 
 \noindent
-We evaluated the number of iterations for both algorithms, value iterations has
-shown less iterations for each different discount factor, yet policy iteration
-found the optimal policy before the value converges (for =0.99, optimal policy
-was found 1605 iterations before value converges); therefore, if the problem was
-scaled up, policy iterations would work better since it will always converge to
-the optimal policy. \\
+Value iterations has shown to have less iterations for each discount factor;
+however, policy iteration is able to find the optimal policy before the value
+converges. For example, for a discount factor of 0.99, optimal policy was found
+1605 iterations before value converges. Because of this, policy iterations would
+work better when the problem is scaled up since optimal policy is always found
+before the value function converges.\\
 
 \noindent
 \textbf{-}
@@ -742,35 +751,18 @@ that you discovered while building or running your experiments.}
 \\
 
 \noindent
-Challenge 1: It was found that there are two ways to update cells(states). First
-way is to update the cell with its new found value, and computation of values of
-the following cells is based on the new value. Second way is to update all the
-cells at the end, and they are updated all at once. The difference is whether
-you update the cells inside the for loop or outside the for loop. \\
-
-\noindent
-For policy iteration, both ways will lead to convergence. The second way will
-take more iterations than the first way. \\
-
-\noindent
-For value iteration, the first way will not converge, and the second way will
-converge.  In the first way, we initiate cells value with 0, and we get new
-cells value with only A being 10, B being 5 and the rest of them being 0 . This
-leads delta for some cells to be 0, which is less the threshold set ($10^{-6}$),
-then breaks the loop without maximizing the policy evaluation update. \\
-
-\noindent
-In addition, one of the main challenges for the implementation of both algorithms
-has been the full backup of certains values. The iterative nature of the
-operations in the code requires backup for states values as we are estimating
-new values for each possible next state. For the implementation of value
-titeration, we tried to update the values for each state as soon as new
-calculations are available, yet it didn’t converge because it entered in a loop
-of value updating and some values were not better than the old. Policy iteration
-needs to back up more values than Value Iteration, so the main challenge was to
-ensure that every state value and policy has a full backup before a new
-iteration and don’t update old value until they are compared with new results
-and calculate its convergence rate (delta). \\
+It was found that there are two ways to update cells(states). First way is to
+update the cell with its new found value, and computation of values of the
+following cells is based on the new value. Second way is to update all the cells
+at the end, and they are updated all at once. The difference is whether you
+update the cells inside the for loop or outside the for loop. For policy
+iteration, both ways will lead to convergence. The second way will take more
+iterations than the first way. For value iteration, the first way will not
+converge, and the second way will converge.  In the first way, we initiate cells
+value with 0, and we get new cells value with only A being 10, B being 5 and the
+rest of them being 0 . This leaves delta for some cells to be 0, which is less
+the threshold set ($10^{-6}$), then breaks the loop without maximizing the
+policy evaluation update. \\
 
 % APPENDIX-------------------------------------
 \newpage

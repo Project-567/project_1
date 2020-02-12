@@ -5,6 +5,8 @@ from Gridworld import Gridworld
 from policy_evaluation import policy_evaluation
 import numpy as np
 from random import randint
+from random import randrange
+
 
 # display output
 from random import uniform
@@ -24,7 +26,15 @@ delta_list = []
 # UNCOMMENT THE FOLLOWING FOR EVEN POLICY
 # initialize a policy: create an array of dimension (number of states by number of actions)
 # for equal probability amongst all actions, divide everything by the number of actions
-policy = np.ones([state_count, action_count]) / action_count
+# policy = np.ones([state_count, action_count]) / action_count
+
+
+# initate a policy like [0, 1, 0, 0]
+policy = np.zeros([state_count, action_count])
+for i in range(len(policy)):
+    random_number = randrange(4)
+    policy[i][random_number] = 1
+
 
 # # Initiate a random policy
 # random_policy = np.random.randint(1000, size=(state_count, action_count))
