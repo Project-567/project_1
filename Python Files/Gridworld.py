@@ -1,8 +1,4 @@
-# Assignment 1
-# Four functions
-# Function 1: return the initial state of the MDP
-# Function 2: return a view of all possible states
-# Function 3 and 4: return, respectively, the reward and probability of a transition (s, a, s') from state s to state s' when taking action a
+# Project 1: Gridworld
 
 import numpy as np
 

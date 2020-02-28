@@ -67,11 +67,6 @@ def main():
     # for equal probability amongst all actions, divide everything by the number of actions
     policy = np.ones([state_count, action_count]) / action_count
 
-    # # Initiate a random policy
-    # random_policy = np.random.randint(1000, size=(state_count, action_count))
-    # random_policy = random_policy/random_policy.sum(axis=1)[:,None]
-    # policy = random_policy
-
     # run policy evaluation
     final_value_map, max_iter, delta, policy = policy_evaluation(grid.valueMap, grid.states, discount_factor, theta, grid.reward, 
                                                                     grid.p_transition, grid.transition_prob, policy)

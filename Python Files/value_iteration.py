@@ -1,6 +1,3 @@
-# implement value iteration to solve the Bellman equations derived earlier
-# run the algorithm with different discount factor
-
 # Value Iteration
 from Gridworld import Gridworld
 from policy_evaluation import policy_evaluation
@@ -138,9 +135,6 @@ print(policy_table)
 print("Value Map: ")
 np.set_printoptions(precision=4)
 print(grid.valueMap)
-# print("Policy: ")
-# print(policy)
-# np.save("value_iteration_80", policy)
 
 
 # PRINT DELTA PLOT #####################################################################
