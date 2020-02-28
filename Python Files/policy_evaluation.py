@@ -85,7 +85,7 @@ def main():
     plt.title('Policy Evaluation with Discount Factor ' + str(discount_factor))
     plt.xlabel('Iterations')
     plt.ylabel('Max Delta')
-    plt.savefig('graphs/policy_evaluation_'+str(int(discount_factor*100))+'.png')
+    # plt.savefig('graphs/policy_evaluation_'+str(int(discount_factor*100))+'.png')
     plt.show()
 
 if __name__ == "__main__":
